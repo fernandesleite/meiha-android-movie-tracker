@@ -12,7 +12,7 @@
         android:orientation="vertical">
         <fragment
             android:id="@+id/movieListFragment"
-            android:name="com.moviedb.MovieList"
+            android:name="com.moviedb.movieList.MovieList"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
