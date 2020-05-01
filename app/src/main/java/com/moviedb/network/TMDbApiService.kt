@@ -40,7 +40,7 @@ private val retrofit = Retrofit.Builder()
 interface TMDbApiService {
 
     @GET("movie/popular")
-    suspend fun getPopularMovies() : MoviesResponse
+    suspend fun getPopularMovies() : TMDbMoviesResponse
 }
 
 //Lazy public object so only one instance is created when called

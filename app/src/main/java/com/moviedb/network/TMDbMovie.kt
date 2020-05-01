@@ -1,16 +1,12 @@
-package com.moviedb.persistence
+package com.moviedb.network
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "movie_table")
-data class Movie(
+data class TMDbMovie (
     val poster_path: String?,
     val adult: Boolean?,
     val overview: String?,
     val release_date: String?,
     val genre_ids: List<Int>?,
-    @PrimaryKey val id: Int,
+    val id: Int,
     val original_title: String?,
     val title: String?,
     val backdrop_path: String?,

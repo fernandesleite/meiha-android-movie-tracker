@@ -34,19 +34,19 @@ class MovieAppDatabaseTest {
     }
 
     //Tests use getAllMovies return type = List<Movie> instead of Livedata<List<Movie>>
-    @Test
-    @Throws(Exception::class)
-    fun insertAndGetMovie() {
-        val movie = Movie(null, null, null, null, null, 1, null, null, null, null, null, null, null)
-        dao.insert(movie)
-//        assertEquals("Test 1: Add first movie, size: 1", 1, dao.getAllMovies().size)
-        val movie2 =
-            Movie(null, null, null, null, null, 2, null, null, null, null, null, null, null)
-        dao.insert(movie2)
-//        assertEquals("Test 2: Add second movie, size: 2", 2, dao.getAllMovies().size)
-        dao.clear()
-//        assertEquals("Test 4: Delete all, size: 0", 0, dao.getAllMovies().size)
-        dao.insertAll(listOf(movie, movie2))
-//        assertEquals("Test 5: Insert all, size: 2", 2, dao.getAllMovies().size)
-    }
+//    @Test
+//    @Throws(Exception::class)
+//    fun insertAndGetMovie() {
+//        val movie = Movie(null, null, null, null, null, 1, null, null, null, null, null, null, null)
+//        dao.insert(movie)
+////        assertEquals("Test 1: Add first movie, size: 1", 1, dao.getAllMovies().size)
+//        val movie2 =
+//            Movie(null, null, null, null, null, 2, null, null, null, null, null, null, null)
+//        dao.insert(movie2)
+////        assertEquals("Test 2: Add second movie, size: 2", 2, dao.getAllMovies().size)
+//        dao.clear()
+////        assertEquals("Test 4: Delete all, size: 0", 0, dao.getAllMovies().size)
+//        dao.insertAll(listOf(movie, movie2))
+////        assertEquals("Test 5: Insert all, size: 2", 2, dao.getAllMovies().size)
+//    }
 }
