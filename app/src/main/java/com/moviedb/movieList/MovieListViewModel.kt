@@ -1,35 +1,32 @@
 package com.moviedb.movieList
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.moviedb.network.TMDbApi
+import android.app.Application
+import android.util.Log
+import androidx.lifecycle.AndroidViewModel
+import com.moviedb.persistence.MoviesAppDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class MovieListViewModel : ViewModel() {
-    private val _response = MutableLiveData<String>()
-    val response : LiveData<String>
-        get() = _response
+class MovieListViewModel(application: Application) : AndroidViewModel(application){
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+    private val movieRepository = MovieRepository(MoviesAppDatabase.getInstance(application.applicationContext))
+    val movie = movieRepository.movies
 
     init {
-        getTMDbApiServiceMovies()
+        refreshDataFromRepository()
     }
 
-    private fun getTMDbApiServiceMovies() {
+    private fun refreshDataFromRepository() {
         coroutineScope.launch {
-            val getMovieListSuspended = TMDbApi.retrofitService.getPopularMovies()
             try {
-                val listResult = getMovieListSuspended
-                _response.value = listResult.toString()
+                movieRepository.refreshMoviesOfflineCache()
             }   catch (e: Exception) {
-                _response.value = "Failure: ${e.message}"
+                Log.e("MovieListViewModel", e.message, e)
             }
         }
     }
