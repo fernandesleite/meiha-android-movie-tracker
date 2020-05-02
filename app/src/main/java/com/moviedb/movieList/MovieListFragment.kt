@@ -21,6 +21,7 @@ class MovieList : Fragment() {
         val binding = MovieListFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.movieList.adapter = MovieAdapter()
         return binding.root
     }
 

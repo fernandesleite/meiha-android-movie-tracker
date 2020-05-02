@@ -3,7 +3,10 @@ package com.moviedb.util
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.moviedb.movieList.MovieAdapter
+import com.moviedb.persistence.Movie
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
@@ -14,4 +17,11 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             .load(imgUri)
             .into(imgView)
     }
+}
+
+@BindingAdapter("listData")
+fun bindRecyclerView(recyclerView: RecyclerView,
+                     data: List<Movie>?) {
+    val adapter = recyclerView.adapter as MovieAdapter
+    adapter.submitList(data)
 }
