@@ -16,7 +16,7 @@
             android:id="@+id/movieImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:imageUrl="@{viewModel.movie[0].poster_path}" />
+            app:imageUrl="@{viewModel.movies[0].poster_path}" />
 
     </FrameLayout>
 </layout>
