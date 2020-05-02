@@ -15,7 +15,7 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
     private val movieRepository = MovieRepository(MoviesAppDatabase.getInstance(application.applicationContext))
-    val movie = movieRepository.movies
+    val movies = movieRepository.movies
 
     init {
         refreshDataFromRepository()

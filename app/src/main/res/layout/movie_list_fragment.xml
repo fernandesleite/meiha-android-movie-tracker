@@ -15,19 +15,16 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/movie_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="6dp"
+            android:clipToPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:listData="@{viewModel.movie}"/>
-<!--        <ImageView-->
-<!--            android:id="@+id/movieImage"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            app:imageUrl="@{viewModel.movie[0].poster_path}" />-->
+            app:listData="@{viewModel.movies}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
