@@ -1,6 +1,8 @@
 package com.moviedb.util
 
+import com.moviedb.network.TMDbGenre
 import com.moviedb.network.TMDbMovie
+import com.moviedb.persistence.Genre
 import com.moviedb.persistence.Movie
 
 fun List<TMDbMovie>.toDatabase(): List<Movie> {
@@ -42,3 +44,4 @@ fun List<Movie>.toDomain(): List<TMDbMovie> {
         )
     }
 }
+
