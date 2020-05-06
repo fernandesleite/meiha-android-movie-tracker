@@ -8,15 +8,46 @@
             name="viewModel"
             type="com.moviedb.movieList.MovieListViewModel" />
     </data>
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".movieList.MovieList">
-        <ImageView
-            android:id="@+id/movieImage"
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/movie_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:imageUrl="@{viewModel.movies[0].poster_path}" />
+            android:background="@color/colorPrimaryDark"
+            android:clipToPadding="true"
+            android:longClickable="false"
+            android:padding="6dp"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:listData="@{viewModel.movies}"
+            tools:itemCount="23" />
 
-    </FrameLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+
+                android:id="@+id/main_activity_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:title="Movies" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/main_activity_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabGravity="fill"
+                app:tabMode="scrollable" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
