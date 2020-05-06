@@ -16,4 +16,8 @@ class MovieRepository(private val database: MoviesAppDatabase) {
         }
     }
     val movies: LiveData<List<Movie>> = database.movieDao.getAllMovies()
+
+    fun getMovieDetails(id: Int): LiveData<Movie> {
+        return database.movieDao.getMovie(id)
+    }
 }
