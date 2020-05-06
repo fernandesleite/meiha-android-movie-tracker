@@ -9,7 +9,6 @@ import com.moviedb.databinding.ListItemMovieBinding
 import com.moviedb.persistence.Movie
 
 class MovieAdapter : ListAdapter<Movie, MovieAdapter.MovieViewHolder>(DiffCallback) {
-
     class MovieViewHolder(private val binding: ListItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movie : Movie) {
             binding.movie = movie
@@ -30,7 +29,7 @@ class MovieAdapter : ListAdapter<Movie, MovieAdapter.MovieViewHolder>(DiffCallba
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(ListItemMovieBinding.inflate(LayoutInflater.from(parent.context)))
+        return MovieViewHolder(ListItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
