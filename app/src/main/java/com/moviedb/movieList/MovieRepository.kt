@@ -11,8 +11,9 @@ import kotlinx.coroutines.withContext
 class MovieRepository(private val database: MoviesAppDatabase) {
     suspend fun refreshMoviesOfflineCache() {
         withContext(Dispatchers.IO) {
+            database.movieDao.clear()
             val getMovieListSuspended = TMDbApi.retrofitService.getPopularMovies()
-            database.movieDao.insertAll(getMovieListSuspended.results.toDatabase())
+            database.movieDao.insertAll(getMovieListSuspended.results.toDatabase(database))
         }
     }
     val movies: LiveData<List<Movie>> = database.movieDao.getAllMovies()

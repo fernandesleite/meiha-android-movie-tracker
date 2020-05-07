@@ -27,8 +27,8 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     private fun refreshDataFromRepository() {
         coroutineScope.launch {
             try {
-                movieRepository.refreshMoviesOfflineCache()
                 genreRepository.refreshGenresOfflineCache()
+                movieRepository.refreshMoviesOfflineCache()
             }   catch (e: Exception) {
                 Log.e("MovieListViewModel", e.message, e)
             }
