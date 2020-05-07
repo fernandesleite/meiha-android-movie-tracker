@@ -9,7 +9,7 @@ data class Movie(
     val adult: Boolean?,
     val overview: String?,
     val release_date: String?,
-    val genre_ids: List<Int>?,
+    val genre_ids: List<String>?,
     @PrimaryKey val id: Int,
     val original_title: String?,
     val title: String?,

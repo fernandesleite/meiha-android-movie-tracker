@@ -20,6 +20,6 @@ interface MovieDao {
     @Query("SELECT * FROM movie_table where id = :id")
     fun getMovie(id: Int) : LiveData<Movie>
 
-    @Query("SELECT * FROM movie_table")
+    @Query("SELECT * FROM movie_table ORDER BY popularity DESC")
     fun getAllMovies(): LiveData<List<Movie>>
 }
