@@ -17,10 +17,10 @@ class MovieDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MovieDetailsViewModel::class.java)
         val activity = requireNotNull(this.activity)
         viewModelFactory =
             MovieDetailsViewModelFactory(requireArguments().getInt("movieId"), activity.application)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MovieDetailsViewModel::class.java)
 
         val binding = MovieDetailsFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = this

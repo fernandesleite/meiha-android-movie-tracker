@@ -1,21 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.moviedb.movieDetails.MovieDetailsViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".movieDetails.MovieDetailsFragment">
 
-        <TextView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@{viewModel.movie.title}" />
-    </FrameLayout>
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a nisl eget ipsum eleifend accumsan at vel odio. Mauris a ante a erat ullamcorper interdum. Donec sapien augue, commodo sed orci et, porta posuere sapien. Sed scelerisque elit sed ipsum eleifend fermentum. Quisque efficitur est in mollis volutpat. Aenean nibh felis, feugiat quis elit eu, tincidunt egestas tellus. Mauris augue tellus, volutpat quis suscipit a, bibendum in nunc. Nulla nulla orci, vehicula non aliquam sit amet, ultricies a turpis.
+
+Suspendisse eu massa nunc. Mauris malesuada mi odio, vitae commodo metus elementum ullamcorper. Duis eget suscipit lacus. Integer commodo vel ante ac dictum. Donec sit amet urna sed erat volutpat sagittis. Proin posuere enim ex, in pulvinar nisi imperdiet vitae. Cras scelerisque feugiat congue.
+
+Proin iaculis, erat et elementum consequat, augue magna pretium diam, consequat tincidunt ex lacus a lectus. Proin sit amet enim id ante semper malesuada. Suspendisse potenti. Donec in nisi et nunc commodo imperdiet. Nulla ac ultricies libero. Quisque ultrices aliquam eleifend. Donec in cursus lorem. Sed iaculis nibh et congue dictum. Ut a tristique enim, vel varius quam. In ornare neque vitae tellus efficitur, non blandit diam vestibulum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce pulvinar dui porttitor accumsan fermentum.
+
+Nam at ligula magna. Aenean magna orci, hendrerit a nulla ut, condimentum rutrum tortor. Aliquam eu eleifend nisi, nec fringilla ipsum. Suspendisse id varius libero. Suspendisse non magna et mi finibus interdum. Maecenas eget efficitur dui. Sed luctus tristique metus quis venenatis. Donec nec turpis ac nisl placerat pulvinar in ac nisi. In condimentum risus turpis, hendrerit viverra justo porta ut. Maecenas vitae pretium urna. Proin imperdiet, ipsum ultrices fermentum tristique, ipsum lectus tempus est, quis lacinia turpis erat interdum velit.
+
+Donec in quam scelerisque, pharetra velit sit amet, dignissim est. Nulla in luctus lorem. Donec eu viverra nibh. Nulla pellentesque non metus quis aliquet. Nullam elementum sodales quam eu congue. Donec sit amet nulla fermentum, vestibulum orci eu, accumsan est. Aenean vehicula, turpis eget lacinia iaculis, lorem ex consequat purus, ac porta lacus felis ac quam. Sed scelerisque, purus in bibendum molestie, sem mi sagittis tortor, eu egestas mi tortor at neque. Sed ac mattis massa. Integer justo nulla, pretium consectetur velit quis, finibus vestibulum orci. Quisque non iaculis eros. Pellentesque tempus mollis lorem non consectetur. Nullam laoreet pretium nibh in sagittis."
+
+                tools:text="@tools:sample/lorem[50]" />
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                app:expandedTitleMarginEnd="64dp"
+                app:expandedTitleMarginStart="48dp"
+                android:textColor="@color/text_secondary"
+                app:contentScrim="?attr/colorPrimary"
+                app:title="@{viewModel.movie.title}"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{viewModel.movie.backdrop_path}"
+                    app:layout_collapseMode="parallax" />
+
+                <androidx.appcompat.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_scrollFlags="scroll|enterAlways"
+
+       />
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
