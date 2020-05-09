@@ -8,6 +8,7 @@ import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 
 private const val BASE_URL = "https://api.themoviedb.org/3/"
@@ -23,7 +24,7 @@ class ApiInterceptor : Interceptor {
     }
 }
 
-private val client : OkHttpClient = OkHttpClient.Builder()
+private val client: OkHttpClient = OkHttpClient.Builder()
     .addInterceptor(ApiInterceptor())
     .build()
 
@@ -39,14 +40,24 @@ private val retrofit = Retrofit.Builder()
 
 interface TMDbApiService {
     @GET("movie/popular")
-    suspend fun getPopularMovies() : TMDbMoviesResponse
+    suspend fun getPopularMovies(): TMDbMoviesResponse
+
+    @GET("movie/{movieId}")
+    suspend fun getMovieDetails(@Path("movieId") movieId: Int): TMDbMovieDetails
+
+    @GET("movie/{movieId}/credits")
+    suspend fun getMovieCredits(@Path("movieId") movieId: Int): TMDbMovieCredits
+
+    @GET("movie/{movieId}/recommendations")
+    suspend fun getMovieRecommendations(@Path("movieId") movieId: Int): TMDbMovieRecommendations
+
     @GET("genre/movie/list")
     suspend fun getGenreList(): TMDbGenresResponse
 }
 
 //Lazy public object so only one instance is created when called
 object TMDbApi {
-    val retrofitService : TMDbApiService by lazy {
+    val retrofitService: TMDbApiService by lazy {
         retrofit.create(TMDbApiService::class.java)
     }
 }
