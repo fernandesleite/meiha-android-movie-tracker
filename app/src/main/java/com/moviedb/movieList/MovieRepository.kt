@@ -1,7 +1,7 @@
 package com.moviedb.movieList
 
 import androidx.lifecycle.LiveData
-import com.moviedb.network.TMDbApi
+import com.moviedb.network.*
 import com.moviedb.util.toDatabase
 import com.moviedb.persistence.Movie
 import com.moviedb.persistence.MoviesAppDatabase
@@ -16,9 +16,17 @@ class MovieRepository(private val database: MoviesAppDatabase) {
             database.movieDao.insertAll(getMovieListSuspended.results.toDatabase(database))
         }
     }
-    val movies: LiveData<List<Movie>> = database.movieDao.getAllMovies()
 
-    fun getMovieDetails(id: Int): LiveData<Movie> {
-        return database.movieDao.getMovie(id)
-    }
+    suspend fun getPopularMovies(): TMDbMoviesResponse = TMDbApi.retrofitService.getPopularMovies()
+
+    suspend fun getMovieDetails(movieId: Int): TMDbMovieDetails =
+        TMDbApi.retrofitService.getMovieDetails(movieId)
+
+    suspend fun getMovieCredits(movieId: Int): TMDbMovieCredits =
+        TMDbApi.retrofitService.getMovieCredits(movieId)
+
+    suspend fun getMovieRecommendations(movieId: Int): TMDbMovieRecommendations =
+        TMDbApi.retrofitService.getMovieRecommendations(movieId)
+
+    val movies: LiveData<List<Movie>> = database.movieDao.getAllMovies()
 }
