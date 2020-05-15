@@ -84,4 +84,7 @@ dependencies {
 
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    implementation 'jp.wasabeef:glide-transformations:4.1.0'
 }

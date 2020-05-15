@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.moviedb.movieList.MovieAdapter
 import com.moviedb.persistence.Movie
+import jp.wasabeef.glide.transformations.BlurTransformation
 import okhttp3.internal.format
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -27,6 +29,20 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             .load(imgUri)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .transform(RoundedCorners(8))
+            .into(imgView)
+    }
+}
+
+@BindingAdapter("imageBlur")
+fun bindImageBlur(imgView: ImageView, imgUrl: String?) {
+    imgUrl?.let {
+        val fullUri = "https://image.tmdb.org/t/p/original$imgUrl"
+        val imgUri = fullUri.toUri().buildUpon().scheme("http").build()
+        Glide.with(imgView.context)
+            .load(imgUri)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .transform(RoundedCorners(8))
+            .apply(RequestOptions.bitmapTransform(BlurTransformation(15, 1)))
             .into(imgView)
     }
 }
