@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.moviedb.movieDetails.MovieDetailsViewModel" />
     </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".movieDetails.MovieOverviewFragment">
@@ -26,21 +29,214 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/spacing_normal"
                     android:layout_marginTop="@dimen/spacing_normal"
-                    android:textAppearance="@style/TitleTextAppearance"
                     android:text="@string/synopsis"
+                    android:textAppearance="@style/TitleTextAppearance"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:id="@+id/synopsis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_normal"
                     android:layout_marginEnd="@dimen/spacing_normal"
-                    android:textAppearance="@style/ContentTextAppearance"
                     android:text="@{viewModel.details.overview}"
-                    tools:text="@tools:sample/lorem[10]"
+                    android:textAppearance="@style/ContentTextAppearance"
                     app:layout_constraintStart_toEndOf="@id/synopsis_title"
-                    app:layout_constraintTop_toBottomOf="@id/synopsis_title" />
+                    app:layout_constraintTop_toBottomOf="@id/synopsis_title"
+                    tools:text="@tools:sample/lorem[10]" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_margin="@dimen/spacing_normal"
+                    android:background="@color/colorAccent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/synopsis" />
+
+                <GridLayout
+                    android:id="@+id/details_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:rowCount="5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view1">
+
+                    <TextView
+                        android:id="@+id/status_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:gravity="start"
+                        android:text="@string/status"
+                        android:textAppearance="@style/Title2TextAppearance" />
+
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:gravity="start"
+                        android:text="@{viewModel.details.status}"
+                        android:textAppearance="@style/ContentTextAppearance"
+                        tools:text="100 00000" />
+
+                    <TextView
+                        android:id="@+id/original_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:gravity="start"
+                        android:text="@string/original_title"
+                        android:textAppearance="@style/Title2TextAppearance" />
+
+                    <TextView
+                        android:id="@+id/original"
+                        android:layout_width="1dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:gravity="start"
+                        android:text="@{viewModel.details.original_title}"
+                        android:textAppearance="@style/ContentTextAppearance"
+                        tools:text="100 00000" />
+
+                    <TextView
+                        android:id="@+id/original_language_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:gravity="start"
+                        android:text="@string/original_language"
+                        android:textAppearance="@style/Title2TextAppearance" />
+
+                    <TextView
+                        android:id="@+id/original_language"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:gravity="start"
+                        android:text="@{viewModel.details.original_language}"
+                        android:textAppearance="@style/ContentTextAppearance"
+                        tools:text="10000000" />
+
+                    <TextView
+                        android:id="@+id/spoken_languages_titles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:gravity="start"
+                        android:text="@string/spoken_languages"
+                        android:textAppearance="@style/Title2TextAppearance" />
+
+                    <TextView
+                        android:id="@+id/spoken_languages"
+                        android:layout_width="1dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="10"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:gravity="start"
+                        android:lineSpacingExtra="-5dp"
+                        android:textAppearance="@style/ContentTextAppearance"
+                        tools:text="100 00000" />
+
+                    <TextView
+                        android:id="@+id/production_companies_titles"
+                        android:layout_width="1dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:gravity="start"
+                        android:text="@string/production_companies"
+                        android:textAppearance="@style/Title2TextAppearance" />
+
+                    <TextView
+                        android:id="@+id/production_companies"
+                        android:layout_width="1dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:gravity="start"
+                        android:lineSpacingExtra="-5dp"
+                        android:textAppearance="@style/ContentTextAppearance"
+                        tools:text="100 00000" />
+
+                    <TextView
+                        android:id="@+id/budget_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:gravity="start"
+                        android:text="@string/budget"
+                        android:textAppearance="@style/Title2TextAppearance" />
+
+                    <TextView
+                        android:id="@+id/budget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:gravity="start"
+                        android:textAppearance="@style/ContentTextAppearance"
+                        app:intToCurrency="@{viewModel.details.budget}"
+                        tools:text="10000000" />
+
+                    <TextView
+                        android:id="@+id/revenue_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:gravity="start"
+                        android:text="@string/revenue"
+                        android:textAppearance="@style/Title2TextAppearance" />
+
+                    <TextView
+                        android:id="@+id/revenue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:gravity="start"
+                        android:textAppearance="@style/ContentTextAppearance"
+                        app:intToCurrency="@{viewModel.details.revenue}"
+                        tools:text="10000000" />
+
+                </GridLayout>
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_margin="@dimen/spacing_normal"
+                    android:background="@color/colorAccent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/details_grid" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

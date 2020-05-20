@@ -1,11 +1,10 @@
 package com.moviedb.movieList
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.moviedb.databinding.MovieListFragmentBinding
 
@@ -17,11 +16,12 @@ class MovieList : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         viewModel = ViewModelProvider(this).get(MovieListViewModel::class.java)
         val binding = MovieListFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.movieList.adapter = MovieAdapter()
+        binding.movieList.adapter = MovieListAdapter()
         return binding.root
     }
 

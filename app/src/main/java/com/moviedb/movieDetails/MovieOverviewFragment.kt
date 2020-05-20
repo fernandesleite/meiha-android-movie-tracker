@@ -1,33 +1,36 @@
 package com.moviedb.movieDetails
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
-
-import com.moviedb.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.moviedb.databinding.FragmentMovieOverviewBinding
-import com.moviedb.databinding.MovieDetailsFragmentBinding
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
-class MovieOverviewFragment() : Fragment() {
 
-    private lateinit var viewModel: MovieDetailsViewModel
-    private lateinit var viewModelFactory: MovieDetailsViewModelFactory
+class MovieOverviewFragment(var viewModel: MovieDetailsViewModel) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val activity = requireNotNull(this.activity)
-        viewModelFactory = MovieDetailsViewModelFactory(requireParentFragment().requireArguments().getInt("movieId"), activity.application)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MovieDetailsViewModel::class.java)
-
         val binding = FragmentMovieOverviewBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
+        viewModel.details.observe(viewLifecycleOwner, Observer {
+            binding.spokenLanguages.text = it.spoken_languages.joinToString("\n\n") { language ->
+                language.name
+            }
+        })
+        viewModel.details.observe(viewLifecycleOwner, Observer {
+            binding.productionCompanies.text =
+                it.production_companies.joinToString("\n\n") { companies ->
+                    companies.name
+                }
+        })
         return binding.root
     }
 

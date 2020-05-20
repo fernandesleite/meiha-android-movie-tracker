@@ -5,16 +5,21 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.moviedb.movieList.MovieRepository
 import com.moviedb.network.TMDbMovieCredits
 import com.moviedb.network.TMDbMovieDetails
-import com.moviedb.network.TMDbMovieRecommendations
+import com.moviedb.persistence.Movie
 import com.moviedb.persistence.MoviesAppDatabase
-import kotlinx.coroutines.*
+import com.moviedb.repositories.MovieRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class MovieDetailsViewModel(movieId: Int, application: Application) :
     AndroidViewModel(application) {
-    private val movieRepository = MovieRepository(MoviesAppDatabase.getInstance(application))
+    private val movieRepository = MovieRepository(
+        MoviesAppDatabase.getInstance(application)
+    )
 
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -27,8 +32,8 @@ class MovieDetailsViewModel(movieId: Int, application: Application) :
     val credits: LiveData<TMDbMovieCredits>
         get() = _credits
 
-    private val _recommendations = MutableLiveData<TMDbMovieRecommendations>()
-    val recommendations: LiveData<TMDbMovieRecommendations>
+    private val _recommendations = MutableLiveData<List<Movie>>()
+    val recommendations: LiveData<List<Movie>>
         get() = _recommendations
 
     init {
@@ -42,7 +47,7 @@ class MovieDetailsViewModel(movieId: Int, application: Application) :
                 _credits.value = movieRepository.getMovieCredits(movieId)
                 _recommendations.value = movieRepository.getMovieRecommendations(movieId)
             }
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Log.e("MovieDetailsViewModel", e.message, e)
         }
     }

@@ -1,6 +1,6 @@
 package com.moviedb.network
 
-import com.squareup.moshi.*
+import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -42,7 +42,7 @@ interface TMDbApiService {
     @GET("movie/popular")
     suspend fun getPopularMovies(): TMDbMoviesResponse
 
-    @GET("movie/{movieId}")
+    @GET("movie/{movieId}?append_to_response=recommendations,credits,videos&")
     suspend fun getMovieDetails(@Path("movieId") movieId: Int): TMDbMovieDetails
 
     @GET("movie/{movieId}/credits")

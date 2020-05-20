@@ -1,24 +1,22 @@
 package com.moviedb.movieDetails
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.moviedb.databinding.FragmentMovieRecommendationsBinding
+import com.moviedb.movieList.MovieListAdapter
 
-import com.moviedb.R
-
-/**
- * A simple [Fragment] subclass.
- */
-class MovieRecommendationsFragment : Fragment() {
-
+class MovieRecommendationsFragment(val viewModel: MovieDetailsViewModel) : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie_recommendations, container, false)
+        val binding = FragmentMovieRecommendationsBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+        binding.movieList.adapter = MovieListAdapter()
+        return binding.root
     }
-
 }

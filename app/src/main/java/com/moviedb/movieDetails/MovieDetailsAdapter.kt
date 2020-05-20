@@ -1,20 +1,21 @@
 package com.moviedb.movieDetails
 
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class MovieDetailsAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+
+class MovieDetailsAdapter(private val fragment: Fragment, val viewModel: MovieDetailsViewModel) :
+    FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
         return 3
     }
 
     override fun createFragment(position: Int): Fragment {
-        return when(position) {
-            0 -> MovieOverviewFragment()
-            1 -> MovieCreditsFragment()
-            2 -> MovieRecommendationsFragment()
-            else -> MovieOverviewFragment()
+        return when (position) {
+            0 -> MovieOverviewFragment(viewModel)
+            1 -> MovieCreditsFragment(viewModel)
+            2 -> MovieRecommendationsFragment(viewModel)
+            else -> MovieOverviewFragment(viewModel)
         }
     }
 }

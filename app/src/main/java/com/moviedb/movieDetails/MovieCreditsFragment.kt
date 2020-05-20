@@ -1,24 +1,21 @@
 package com.moviedb.movieDetails
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.moviedb.databinding.FragmentMovieCreditsBinding
 
-import com.moviedb.R
-
-/**
- * A simple [Fragment] subclass.
- */
-class MovieCreditsFragment : Fragment() {
+class MovieCreditsFragment(val viewModel: MovieDetailsViewModel) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie_credits, container, false)
+        val binding = FragmentMovieCreditsBinding.inflate(inflater)
+        binding.viewModel = viewModel
+        binding.creditsList.adapter = MovieCreditsAdapter()
+        return binding.root
     }
-
 }

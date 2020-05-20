@@ -1,6 +1,6 @@
 package com.moviedb.network
 
-data class TMDbMovie (
+data class TMDbMovie(
     val poster_path: String?,
     val adult: Boolean?,
     val overview: String?,

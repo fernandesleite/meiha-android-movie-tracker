@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">MovieDB Android Demo</string>
-    <string name="hello_blank_fragment">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at congue est. Suspendisse sed consectetur velit, sed lacinia ex. Donec non ante nec lacus ullamcorper placerat. Sed diam neque, molestie vitae lorem in, vulputate euismod odio. Nulla porttitor dui eros, accumsan laoreet ligula sagittis at. Donec ut magna nec risus cursus aliquet. Cras condimentum interdum purus, at condimentum mi semper eget. Fusce pulvinar finibus convallis. Sed vestibulum efficitur tortor, at accumsan risus condimentum nec. Curabitur feugiat bibendum ante, non ultrices nisl fermentum ut. Vestibulum in scelerisque lacus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-
-Praesent convallis ipsum mauris, non fringilla dui egestas consectetur. Pellentesque mauris ex, euismod sit amet porttitor in, pulvinar eu tortor. Nam congue risus in sollicitudin cursus. Nullam vel libero quis leo pretium placerat. Cras mollis lacinia est, in consequat dolor commodo ut. In non odio nec lectus mollis vehicula. Vestibulum sagittis egestas commodo. Ut et arcu velit. Suspendisse non molestie lectus, sit amet ornare nulla. Vivamus malesuada augue sem, nec convallis odio mollis at.
-
-Mauris hendrerit tortor ut tortor scelerisque semper. Donec arcu purus, iaculis eu tellus in, fringilla congue odio. Morbi feugiat fermentum augue, iaculis pellentesque est pulvinar non. Nullam et vestibulum mi. Duis sollicitudin elementum sapien, vel volutpat dui malesuada vitae. Maecenas ullamcorper dui ex, in pretium ex semper in. Phasellus ullamcorper augue et pellentesque consequat. Etiam et pellentesque nulla. Nunc malesuada enim id dignissim mattis. Nunc sollicitudin sed turpis nec cursus. Suspendisse potenti.
-
-Pellentesque pulvinar imperdiet pretium. Maecenas vitae dapibus orci. Fusce venenatis urna id libero dignissim dapibus. In in accumsan orci. Vivamus molestie, urna sed suscipit venenatis, dolor magna dapibus est, vel luctus tellus dolor congue leo. Integer finibus non ligula eu malesuada. Suspendisse pellentesque, lorem a congue dapibus, tortor sapien viverra nisi, ac tincidunt tortor leo sed mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin posuere magna a venenatis varius. Donec non sapien eu sem finibus rhoncus at quis mi.
-
-In semper sem a mollis dignissim. Ut fringilla laoreet tincidunt. Sed enim risus, sagittis sit amet libero nec, aliquet tristique tellus. Nulla facilisi. Cras nec mauris elementum, convallis urna a, condimentum erat. Suspendisse viverra fermentum nulla. Mauris eu quam tempor, volutpat neque non, aliquet orci. Nulla vehicula varius ex eget tristique</string>
     <string name="synopsis">Synopsis</string>
     <string name="star_score">Star Score</string>
+    <string name="runtimeFormat">%1$s min</string>
+    <string name="budget">Budget:</string>
+    <string name="revenue">Revenue:</string>
+    <string name="status">Status:</string>
+    <string name="original_title">Original Title:</string>
+    <string name="spoken_languages">Spoken Languages:</string>
+    <string name="production_companies">Production Companies:</string>
+    <string name="original_language">Original Language:</string>
 </resources>

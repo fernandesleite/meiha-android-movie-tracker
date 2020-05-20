@@ -1,4 +1,4 @@
-package com.moviedb.movieList
+package com.moviedb.repositories
 
 import androidx.lifecycle.LiveData
 import com.moviedb.network.TMDbApi

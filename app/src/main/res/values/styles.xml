@@ -5,10 +5,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:windowBackground">@color/colorPrimaryDark</item>
     </style>
-    <style name="TabLayoutTextSize" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">12sp</item>
-    </style>
+
     <style name="ExpandedTitleTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">0sp</item>
         <item name="android:textColor">@android:color/transparent</item>
@@ -16,12 +15,21 @@
     <style name="TitleTextAppearance">
         <item name="android:textSize">@dimen/medium_title_size</item>
         <item name="android:textColor">@color/text_primary</item>
-        <item name="android:textStyle">bold</item>
-        <item name="fontFamily">@font/roboto</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+    <style name="Title2TextAppearance">
+        <item name="android:textSize">@dimen/content_text_size</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="fontFamily">@font/poppins_bold</item>
     </style>
     <style name="ContentTextAppearance">
         <item name="android:textSize">@dimen/content_text_size</item>
         <item name="android:textColor">@color/text_secondary</item>
-        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="fontFamily">@font/poppins</item>
+    </style>
+    <style name="ExpandedContentTextAppearance">
+        <item name="android:textSize">@dimen/content_text_size_small</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="fontFamily">@font/poppins_light</item>
     </style>
 </resources>
