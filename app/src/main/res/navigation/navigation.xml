@@ -22,4 +22,13 @@
             android:name="movieId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/movieRecommendationsFragment"
+        android:name="com.moviedb.movieDetails.MovieRecommendationsFragment"
+        android:label="fragment_movie_recommendations"
+        tools:layout="@layout/fragment_movie_recommendations">
+        <action
+            android:id="@+id/action_movieRecommendationsFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
 </navigation>

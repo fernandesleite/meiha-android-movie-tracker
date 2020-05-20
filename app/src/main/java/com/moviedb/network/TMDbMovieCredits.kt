@@ -1,9 +1,8 @@
 package com.moviedb.network
 
-data class TMDbMovieCredits (
-    val id: Int,
-    val cast: Cast,
-    val crew: Crew
+data class TMDbMovieCredits(
+    val cast: List<Cast>,
+    val crew: List<Crew>
 ) {
     data class Cast(
         val cast_id: Int,
@@ -15,6 +14,7 @@ data class TMDbMovieCredits (
         val order: Int,
         val profile_path: String?
     )
+
     data class Crew(
         val credit_id: String,
         val department: String,
@@ -23,5 +23,5 @@ data class TMDbMovieCredits (
         val job: String,
         val name: String,
         val profile_path: String?
-        )
+    )
 }

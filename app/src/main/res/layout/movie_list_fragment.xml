@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.moviedb.movieList.MovieListViewModel" />
     </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,7 +27,7 @@
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:listData="@{viewModel.movies}"
+            app:listData="@{viewModel.popularMovies}"
             tools:itemCount="23" />
 
         <com.google.android.material.appbar.AppBarLayout
@@ -32,21 +35,21 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
-                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-
                 android:id="@+id/main_activity_toolbar"
+
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:title="Movies" />
+                app:title="Top Movies" />
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/main_activity_tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabGravity="fill"
-                app:tabMode="scrollable" />
+<!--            <com.google.android.material.tabs.TabLayout-->
+<!--                android:id="@+id/main_activity_tabs"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:tabGravity="fill"-->
+<!--                app:tabMode="scrollable" />-->
         </com.google.android.material.appbar.AppBarLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
