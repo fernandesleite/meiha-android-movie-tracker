@@ -30,7 +30,6 @@ class MovieDetailsFragment : Fragment() {
             MovieDetailsViewModelFactory(requireArguments().getInt("movieId"), activity.application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MovieDetailsViewModel::class.java)
 
-
         val binding = MovieDetailsFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -38,7 +37,6 @@ class MovieDetailsFragment : Fragment() {
             binding.toolbar,
             NavHostFragment.findNavController(requireParentFragment().myNavHostFragment)
         )
-
 
         viewModel.details.observe(viewLifecycleOwner, Observer {
             binding.genreList.text = it.genres.joinToString { genre ->

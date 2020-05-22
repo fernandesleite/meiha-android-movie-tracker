@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.moviedb.databinding.FragmentMovieOverviewBinding
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-
 
 class MovieOverviewFragment(var viewModel: MovieDetailsViewModel) : Fragment() {
 
@@ -16,10 +14,10 @@ class MovieOverviewFragment(var viewModel: MovieDetailsViewModel) : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        retainInstance = true
         val binding = FragmentMovieOverviewBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-
         viewModel.details.observe(viewLifecycleOwner, Observer {
             binding.spokenLanguages.text = it.spoken_languages.joinToString("\n\n") { language ->
                 language.name
@@ -33,5 +31,4 @@ class MovieOverviewFragment(var viewModel: MovieDetailsViewModel) : Fragment() {
         })
         return binding.root
     }
-
 }

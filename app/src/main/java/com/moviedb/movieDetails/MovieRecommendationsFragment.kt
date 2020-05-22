@@ -13,6 +13,7 @@ class MovieRecommendationsFragment(val viewModel: MovieDetailsViewModel) : Fragm
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        retainInstance = true
         val binding = FragmentMovieRecommendationsBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel

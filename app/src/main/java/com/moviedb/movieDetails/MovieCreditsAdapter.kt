@@ -6,18 +6,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.moviedb.databinding.ListItemCreditsBinding
-import com.moviedb.movieList.MovieListAdapter
 import com.moviedb.network.TMDbMovieCredits
 
-class MovieCreditsAdapter: ListAdapter<TMDbMovieCredits.Cast, MovieCreditsAdapter.CreditsViewHolder>(DiffCallback) {
-    class CreditsViewHolder(private val binding: ListItemCreditsBinding) : RecyclerView.ViewHolder(binding.root) {
+class MovieCreditsAdapter :
+    ListAdapter<TMDbMovieCredits.Cast, MovieCreditsAdapter.CreditsViewHolder>(DiffCallback) {
+    class CreditsViewHolder(private val binding: ListItemCreditsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(credits: TMDbMovieCredits.Cast) {
             binding.credits = credits
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback: DiffUtil.ItemCallback<TMDbMovieCredits.Cast>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<TMDbMovieCredits.Cast>() {
         override fun areItemsTheSame(
             oldItem: TMDbMovieCredits.Cast,
             newItem: TMDbMovieCredits.Cast

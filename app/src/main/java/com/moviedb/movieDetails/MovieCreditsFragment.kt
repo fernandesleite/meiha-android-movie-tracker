@@ -13,6 +13,7 @@ class MovieCreditsFragment(val viewModel: MovieDetailsViewModel) : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        retainInstance = true
         val binding = FragmentMovieCreditsBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.creditsList.adapter = MovieCreditsAdapter()
