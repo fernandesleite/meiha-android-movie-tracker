@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MovieDB Android Demo</string>
+    <string name="app_name">MovieDB Tracker</string>
     <string name="synopsis">Synopsis</string>
     <string name="star_score">Star Score</string>
     <string name="runtimeFormat">%1$s min</string>

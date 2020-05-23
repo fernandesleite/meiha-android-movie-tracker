@@ -22,12 +22,12 @@ class MovieOverviewFragment(var viewModel: MovieDetailsViewModel) : Fragment() {
             binding.spokenLanguages.text = it.spoken_languages.joinToString("\n\n") { language ->
                 language.name
             }
-        })
-        viewModel.details.observe(viewLifecycleOwner, Observer {
             binding.productionCompanies.text =
                 it.production_companies.joinToString("\n\n") { companies ->
                     companies.name
                 }
+            binding.progressBar.visibility = View.GONE
+            binding.overviewLayout.visibility = View.VISIBLE
         })
         return binding.root
     }

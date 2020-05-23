@@ -11,7 +11,6 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/test"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".movieDetails.MovieDetailsFragment">
@@ -49,7 +48,6 @@
                         android:layout_height="250dp"
                         android:contentDescription="@{viewModel.details.backdrop_path}"
                         android:scaleType="centerCrop"
-                        app:imageBlur="@{viewModel.details.backdrop_path}"
                         app:layout_collapseMode="parallax"
                         tools:src="@drawable/ic_broken_image" />
 
@@ -61,10 +59,12 @@
                         android:background="@drawable/custom_gradient_bottom" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/details_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:layout_marginBottom="@dimen/spacing_normal">
+                        android:layout_marginBottom="@dimen/spacing_normal"
+                        android:visibility="invisible">
 
                         <TextView
                             android:id="@+id/month_year_release"
@@ -146,6 +146,13 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             tools:src="@drawable/star" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="?attr/actionBarSize" />
                 </FrameLayout>
 
                 <androidx.appcompat.widget.Toolbar

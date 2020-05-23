@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.moviedb.databinding.FragmentMovieCreditsBinding
 
 class MovieCreditsFragment(val viewModel: MovieDetailsViewModel) : Fragment() {
@@ -17,6 +18,9 @@ class MovieCreditsFragment(val viewModel: MovieDetailsViewModel) : Fragment() {
         val binding = FragmentMovieCreditsBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.creditsList.adapter = MovieCreditsAdapter()
+        viewModel.credits.observe(viewLifecycleOwner, Observer {
+            binding.progressBar.visibility = View.GONE
+        })
         return binding.root
     }
 }

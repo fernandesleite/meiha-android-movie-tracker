@@ -29,6 +29,11 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:listData="@{viewModel.recommendations}"
             tools:itemCount="23" />
-
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?attr/actionBarSize" />
     </FrameLayout>
 </layout>

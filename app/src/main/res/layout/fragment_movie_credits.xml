@@ -11,9 +11,10 @@
             type="com.moviedb.movieDetails.MovieDetailsViewModel" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/credits_list"
@@ -28,5 +29,11 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:listCredits="@{viewModel.details.credits.cast}"
             tools:itemCount="23" />
-    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?attr/actionBarSize" />
+    </FrameLayout>
 </layout>
