@@ -11,10 +11,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <fragment
-            android:id="@+id/movieListFragment"
-            android:name="com.moviedb.movieList.MovieList"
+            android:id="@+id/myNavHostFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:navGraph="@navigation/navigation"
+            app:defaultNavHost="true"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

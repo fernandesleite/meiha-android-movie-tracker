@@ -1,35 +1,47 @@
 package com.moviedb.movieList
 
+import android.app.Application
+import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.moviedb.network.TMDbApi
+import com.moviedb.persistence.Movie
+import com.moviedb.persistence.MoviesAppDatabase
+import com.moviedb.repositories.GenreRepository
+import com.moviedb.repositories.MovieRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
-class MovieListViewModel : ViewModel() {
-    private val _response = MutableLiveData<String>()
-    val response : LiveData<String>
-        get() = _response
+class MovieListViewModel(application: Application) : AndroidViewModel(application) {
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+    private val movieRepository = MovieRepository(
+        MoviesAppDatabase.getInstance(application.applicationContext)
+    )
+    private val genreRepository = GenreRepository(
+        MoviesAppDatabase.getInstance(application.applicationContext)
+    )
+    val genres = genreRepository.genres
+
+    private val _popularMovies = MutableLiveData<List<Movie>>()
+    val popularMovies: LiveData<List<Movie>>
+        get() = _popularMovies
 
     init {
-        getTMDbApiServiceMovies()
+        refreshDataFromRepository()
     }
 
-    private fun getTMDbApiServiceMovies() {
+    private fun refreshDataFromRepository() {
         coroutineScope.launch {
-            val getMovieListSuspended = TMDbApi.retrofitService.getPopularMovies()
             try {
-                val listResult = getMovieListSuspended
-                _response.value = listResult.toString()
-            }   catch (e: Exception) {
-                _response.value = "Failure: ${e.message}"
+                genreRepository.refreshGenresOfflineCache()
+                movieRepository.refreshMoviesOfflineCache()
+                _popularMovies.value = movieRepository.getPopularMovies()
+            } catch (e: Exception) {
+                Log.e("MovieListViewModel", e.message, e)
             }
         }
     }

@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">MovieDB Android Demo</string>
+    <string name="app_name">MovieDB Tracker</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="star_score">Star Score</string>
+    <string name="runtimeFormat">%1$s min</string>
+    <string name="budget">Budget:</string>
+    <string name="revenue">Revenue:</string>
+    <string name="status">Status:</string>
+    <string name="original_title">Original Title:</string>
+    <string name="spoken_languages">Spoken Languages:</string>
+    <string name="production_companies">Production Companies:</string>
+    <string name="original_language">Original Language:</string>
 </resources>
