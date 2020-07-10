@@ -21,6 +21,15 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(Di
         }
     }
 
+    val list = mutableListOf<Movie>()
+    fun addItems(items: MutableList<Movie>) {
+        if (!currentList.containsAll(items)) {
+            list.addAll(items)
+            submitList(list)
+            notifyDataSetChanged()
+        }
+    }
+
     companion object DiffCallback : DiffUtil.ItemCallback<Movie>() {
 
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
@@ -44,9 +53,9 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(Di
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = getItem(position)
+
         holder.bind(movie)
         holder.itemView.genre_list.text = movie.genre_ids?.joinToString()
-
         holder.itemView.setOnClickListener { view ->
             val bundle = bundleOf("movieId" to movie.id)
             view.findNavController().navigate(R.id.movieDetailsFragment, bundle)
