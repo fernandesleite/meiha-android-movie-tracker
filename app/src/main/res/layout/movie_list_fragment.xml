@@ -16,6 +16,7 @@
         android:layout_height="match_parent"
         tools:context=".movieList.MovieList">
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/movie_list"
             android:layout_width="match_parent"
@@ -27,7 +28,6 @@
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:listData="@{viewModel.popularMovies}"
             tools:itemCount="23" />
 
         <com.google.android.material.appbar.AppBarLayout
@@ -59,5 +59,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="?attr/actionBarSize"
             android:layout_weight="1" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/spacing_normal"
+            android:src="@drawable/ic_arrow_upward_black_18dp"
+            android:visibility="gone"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

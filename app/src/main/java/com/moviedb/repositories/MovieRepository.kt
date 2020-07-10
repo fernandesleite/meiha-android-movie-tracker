@@ -14,14 +14,14 @@ class MovieRepository(private val database: MoviesAppDatabase) {
     suspend fun refreshMoviesOfflineCache() {
         withContext(Dispatchers.IO) {
             database.movieDao.clear()
-            val getMovieListSuspended = TMDbApi.retrofitService.getPopularMovies()
+            val getMovieListSuspended = TMDbApi.retrofitService.getPopularMovies(1)
             database.movieDao.insertAll(getMovieListSuspended.results.toDatabase(database))
         }
     }
 
-    suspend fun getPopularMovies(): List<Movie> =
+    suspend fun getPopularMovies(page: Int): List<Movie> =
         withContext(Dispatchers.IO) {
-            TMDbApi.retrofitService.getPopularMovies().results.toDatabase(database)
+            TMDbApi.retrofitService.getPopularMovies(page).results.toDatabase(database)
         }
 
     suspend fun getMovieDetails(movieId: Int): TMDbMovieDetails =
