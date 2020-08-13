@@ -10,4 +10,6 @@
     <string name="spoken_languages">Spoken Languages:</string>
     <string name="production_companies">Production Companies:</string>
     <string name="original_language">Original Language:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

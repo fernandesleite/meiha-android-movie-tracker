@@ -34,6 +34,10 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     val popularMovies: LiveData<List<Movie>>
         get() = _popularMovies
 
+    private val _upcomingMovies = MutableLiveData<List<Movie>>()
+    val upcomingMovies: LiveData<List<Movie>>
+        get() = _upcomingMovies
+
     init {
         _page.value = 1
         refreshDataFromRepository()
@@ -45,6 +49,7 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
                 genreRepository.refreshGenresOfflineCache()
                 movieRepository.refreshMoviesOfflineCache()
                 _popularMovies.value = _page.value?.let { movieRepository.getPopularMovies(it) }
+                _upcomingMovies.value = _page.value?.let { movieRepository.getUpcomingMovies(it) }
             } catch (e: Exception) {
                 Log.e("MovieListViewModel", e.message, e)
             }

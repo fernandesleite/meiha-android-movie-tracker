@@ -43,6 +43,9 @@ interface TMDbApiService {
     @GET("movie/popular")
     suspend fun getPopularMovies(@Query("page") page : Int): TMDbMoviesResponse
 
+    @GET("movie/upcoming")
+    suspend fun getUpcomingMovies(@Query("page") page : Int): TMDbMoviesResponse
+
     @GET("movie/{movieId}?append_to_response=recommendations,credits,videos&")
     suspend fun getMovieDetails(@Path("movieId") movieId: Int): TMDbMovieDetails
 
