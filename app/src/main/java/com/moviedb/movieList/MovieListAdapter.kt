@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.moviedb.R
-import com.moviedb.databinding.ListItemMovieBinding
+import com.moviedb.databinding.ItemListMovieBinding
 import com.moviedb.persistence.Movie
-import kotlinx.android.synthetic.main.list_item_movie.view.*
+import kotlinx.android.synthetic.main.item_list_movie.view.*
 
 class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(DiffCallback) {
-    class MovieViewHolder(private val binding: ListItemMovieBinding) :
+    class MovieViewHolder(private val binding: ItemListMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             binding.movie = movie
@@ -43,7 +43,7 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(Di
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
-            ListItemMovieBinding.inflate(
+            ItemListMovieBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

@@ -1,33 +1,20 @@
 package com.moviedb.movieList
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.moviedb.R
-import com.moviedb.databinding.MovieListFragmentBinding
-import com.moviedb.movieDetails.MovieDetailsAdapter
-import kotlinx.android.synthetic.main.movie_details_fragment.*
+import kotlinx.android.synthetic.main.fragment_movie_details.*
 
 class MovieList : Fragment() {
-
-    private lateinit var viewModel: MovieListViewModel
-    private var adapter = MovieListAdapter()
-    private lateinit var binding: MovieListFragmentBinding
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.movie_list_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_movie_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,7 +30,13 @@ class MovieList : Fragment() {
                         tab.text = "Popular"
                     }
                     1 -> {
+                        tab.text = "Now Playing"
+                    }
+                    2 -> {
                         tab.text = "Upcoming"
+                    }
+                    3 -> {
+                        tab.text = "Top Rated"
                     }
                 }
             }).attach()

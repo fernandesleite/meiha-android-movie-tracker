@@ -3,15 +3,13 @@ package com.moviedb
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.moviedb.persistence.*
-
+import com.moviedb.persistence.GenreDao
+import com.moviedb.persistence.MovieDao
+import com.moviedb.persistence.MoviesAppDatabase
 import org.junit.After
-import org.junit.Assert.assertEquals
 import org.junit.Before
-import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
-import java.lang.Exception
 
 @RunWith(AndroidJUnit4::class)
 class MovieAppDatabaseTest {

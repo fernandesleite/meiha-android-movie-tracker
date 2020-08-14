@@ -20,11 +20,10 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.tabs.TabLayoutMediator
-import com.moviedb.R
-import com.moviedb.databinding.MovieDetailsFragmentBinding
+import com.moviedb.databinding.FragmentMovieDetailsBinding
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.movie_details_fragment.*
+import kotlinx.android.synthetic.main.fragment_movie_details.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -42,7 +41,7 @@ class MovieDetailsFragment : Fragment() {
             MovieDetailsViewModelFactory(requireArguments().getInt("movieId"), activity.application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MovieDetailsViewModel::class.java)
 
-        val binding = MovieDetailsFragmentBinding.inflate(inflater)
+        val binding = FragmentMovieDetailsBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         NavigationUI.setupWithNavController(
@@ -103,7 +102,7 @@ class MovieDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val viewPager = viewpager
-        viewPager.adapter = MovieDetailsAdapter(this, viewModel)
+        viewPager.adapter = MovieDetailsPagerAdapter(this, viewModel)
 
         TabLayoutMediator(tabs, viewpager,
             TabLayoutMediator.TabConfigurationStrategy { tab, position ->
@@ -115,7 +114,7 @@ class MovieDetailsFragment : Fragment() {
                         tab.text = "Credits"
                     }
                     2 -> {
-                        tab.text = "Recommendations"
+                        tab.text = "More Like This"
                     }
                 }
             }).attach()

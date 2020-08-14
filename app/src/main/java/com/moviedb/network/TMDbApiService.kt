@@ -41,10 +41,16 @@ private val retrofit = Retrofit.Builder()
 
 interface TMDbApiService {
     @GET("movie/popular")
-    suspend fun getPopularMovies(@Query("page") page : Int): TMDbMoviesResponse
+    suspend fun getPopularMovies(@Query("page") page: Int): TMDbMoviesResponse
 
     @GET("movie/upcoming")
-    suspend fun getUpcomingMovies(@Query("page") page : Int): TMDbMoviesResponse
+    suspend fun getUpcomingMovies(@Query("page") page: Int): TMDbMoviesResponse
+
+    @GET("movie/top_rated")
+    suspend fun getTopRatedMovies(@Query("page") page: Int): TMDbMoviesResponse
+
+    @GET("movie/now_playing")
+    suspend fun getNowPlayingMovies(@Query("page") page: Int): TMDbMoviesResponse
 
     @GET("movie/{movieId}?append_to_response=recommendations,credits,videos&")
     suspend fun getMovieDetails(@Path("movieId") movieId: Int): TMDbMovieDetails

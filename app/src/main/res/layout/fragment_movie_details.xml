@@ -93,12 +93,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/spacing_normal"
                             android:layout_marginEnd="@dimen/spacing_normal"
-                            android:drawableStart="@drawable/star"
                             android:textAppearance="@style/ExpandedContentTextAppearance"
                             app:layout_constraintBaseline_toBaselineOf="@id/runtime"
                             app:layout_constraintStart_toEndOf="@+id/runtime"
                             app:layout_constraintTop_toBottomOf="@+id/genre_list"
-                            tools:text="1.0" />
+                            tools:text="1.0"
+                            app:drawableStartCompat="@drawable/star" />
 
                         <TextView
                             android:id="@+id/genre_list"
@@ -166,9 +166,10 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+                app:tabGravity="fill"
+                app:tabMode="fixed" />
 
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
