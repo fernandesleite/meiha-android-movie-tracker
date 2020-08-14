@@ -11,7 +11,7 @@
             type="com.moviedb.movieList.MovieListViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".movieList.MovieList">
@@ -30,35 +30,13 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:itemCount="23" />
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/main_activity_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:title="@string/app_name" />
-
-<!--            <com.google.android.material.tabs.TabLayout-->
-<!--                android:id="@+id/main_activity_tabs"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:tabGravity="fill"-->
-<!--                app:tabMode="scrollable" />-->
-
-
-        </com.google.android.material.appbar.AppBarLayout>
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="?attr/actionBarSize"
-            android:layout_weight="1" />
+            android:layout_marginTop="?attr/actionBarSize" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_action_button"
             android:layout_width="wrap_content"
@@ -66,6 +44,6 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/spacing_normal"
             android:src="@drawable/ic_arrow_upward_black_18dp"
-            android:visibility="gone"/>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            android:visibility="gone" />
+    </FrameLayout>
 </layout>

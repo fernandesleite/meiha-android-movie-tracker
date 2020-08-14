@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.moviedb.databinding.ListItemCreditsBinding
+import com.moviedb.databinding.ItemListCreditsBinding
 import com.moviedb.network.TMDbMovieCredits
 
 class MovieCreditsAdapter :
     ListAdapter<TMDbMovieCredits.Cast, MovieCreditsAdapter.CreditsViewHolder>(DiffCallback) {
-    class CreditsViewHolder(private val binding: ListItemCreditsBinding) :
+    class CreditsViewHolder(private val binding: ItemListCreditsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(credits: TMDbMovieCredits.Cast) {
             binding.credits = credits
@@ -37,7 +37,7 @@ class MovieCreditsAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreditsViewHolder {
         return CreditsViewHolder(
-            ListItemCreditsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemListCreditsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

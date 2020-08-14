@@ -24,6 +24,21 @@ class MovieRepository(private val database: MoviesAppDatabase) {
             TMDbApi.retrofitService.getPopularMovies(page).results.toDatabase(database)
         }
 
+    suspend fun getUpcomingMovies(page: Int): List<Movie> =
+        withContext(Dispatchers.IO) {
+            TMDbApi.retrofitService.getUpcomingMovies(page).results.toDatabase(database)
+        }
+
+    suspend fun getTopRatedMovies(page: Int): List<Movie> =
+        withContext(Dispatchers.IO) {
+            TMDbApi.retrofitService.getTopRatedMovies(page).results.toDatabase(database)
+        }
+
+    suspend fun getNowPlayingMovies(page: Int): List<Movie> =
+        withContext(Dispatchers.IO) {
+            TMDbApi.retrofitService.getNowPlayingMovies(page).results.toDatabase(database)
+        }
+
     suspend fun getMovieDetails(movieId: Int): TMDbMovieDetails =
         TMDbApi.retrofitService.getMovieDetails(movieId)
 

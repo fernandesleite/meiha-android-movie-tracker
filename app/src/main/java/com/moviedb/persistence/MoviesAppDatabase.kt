@@ -6,7 +6,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.moviedb.persistence.converters.GenreTypeConverter
-import com.moviedb.persistence.converters.IntegerListTypeConverter
 
 @Database(entities = [Movie::class, Genre::class], version = 1, exportSchema = false)
 @TypeConverters(GenreTypeConverter::class)
