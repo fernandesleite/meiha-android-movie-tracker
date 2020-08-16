@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_movieList_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_movieList_to_searchMovieListFragment"
+            app:destination="@id/searchMovieListFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
@@ -31,4 +34,8 @@
             android:id="@+id/action_movieRecommendationsFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/searchMovieListFragment"
+        android:name="com.moviedb.movieList.SearchMovieListFragment"
+        android:label="SearchMovieListFragment" />
 </navigation>

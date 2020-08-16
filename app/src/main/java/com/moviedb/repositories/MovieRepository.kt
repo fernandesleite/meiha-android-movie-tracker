@@ -39,6 +39,11 @@ class MovieRepository(private val database: MoviesAppDatabase) {
             TMDbApi.retrofitService.getNowPlayingMovies(page).results.toDatabase(database)
         }
 
+    suspend fun getSearchMovie(page: Int, query: String): List<Movie> =
+        withContext(Dispatchers.IO) {
+            TMDbApi.retrofitService.getSearchMovie(page, query).results.toDatabase(database)
+        }
+
     suspend fun getMovieDetails(movieId: Int): TMDbMovieDetails =
         TMDbApi.retrofitService.getMovieDetails(movieId)
 

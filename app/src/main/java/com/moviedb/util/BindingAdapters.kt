@@ -50,11 +50,15 @@ fun bindRecyclerViewCredits(
 }
 
 @BindingAdapter("yearReleased")
-fun bindMovieDateYear(textView: TextView, date: String) {
-    val parser = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-    val formatter = SimpleDateFormat("yyyy", Locale.US)
-    val output = formatter.format(parser.parse(date)!!)
-    textView.text = output.toString()
+fun bindMovieDateYear(textView: TextView, date: String?) {
+    try {
+        val parser = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+        val formatter = SimpleDateFormat("yyyy", Locale.US)
+        val output = formatter.format(parser.parse(date)!!)
+        textView.text = output.toString()
+    } catch (e: Exception) {
+        textView.text = "-"
+    }
 }
 
 @BindingAdapter("intToCurrency")

@@ -52,6 +52,9 @@ interface TMDbApiService {
     @GET("movie/now_playing")
     suspend fun getNowPlayingMovies(@Query("page") page: Int): TMDbMoviesResponse
 
+    @GET("search/movie")
+    suspend fun getSearchMovie(@Query("page") page: Int, @Query("query") query: String): TMDbMoviesResponse
+
     @GET("movie/{movieId}?append_to_response=recommendations,credits,videos&")
     suspend fun getMovieDetails(@Path("movieId") movieId: Int): TMDbMovieDetails
 

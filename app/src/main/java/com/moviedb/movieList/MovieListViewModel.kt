@@ -43,6 +43,10 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     val nowPlayingMovies: LiveData<List<Movie>>
         get() = _nowPlayingMovies
 
+    private val _searchMovies = MutableLiveData<List<Movie>>()
+    val searchMovies: LiveData<List<Movie>>
+        get() = _searchMovies
+
     init {
         _page.value = 1
         refreshDataFromRepository()
@@ -67,6 +71,17 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     fun nextPage() {
         _page.value = _page.value?.plus(1)
         refreshDataFromRepository()
+    }
+
+    fun getSearchQuery(query: String) {
+        coroutineScope.launch {
+            try {
+                _searchMovies.value = _page.value?.let { movieRepository.getSearchMovie(it, query) }
+
+            } catch (e: Exception) {
+                Log.e("MovieListViewModel", e.message, e)
+            }
+        }
     }
 }
 
