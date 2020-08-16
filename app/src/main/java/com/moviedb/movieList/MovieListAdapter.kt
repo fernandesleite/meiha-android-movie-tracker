@@ -1,5 +1,6 @@
 package com.moviedb.movieList
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.moviedb.R
 import com.moviedb.databinding.ItemListMovieBinding
 import com.moviedb.persistence.Movie
+import com.moviedb.util.KeyboardBehaviour
 import kotlinx.android.synthetic.main.item_list_movie.view.*
 
 class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(DiffCallback) {
@@ -28,6 +30,12 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(Di
             submitList(list)
             notifyDataSetChanged()
         }
+    }
+
+    fun removeItems() {
+        list.clear()
+        submitList(list)
+        notifyDataSetChanged()
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Movie>() {
@@ -59,6 +67,7 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(Di
         holder.itemView.setOnClickListener { view ->
             val bundle = bundleOf("movieId" to movie.id)
             view.findNavController().navigate(R.id.movieDetailsFragment, bundle)
+            KeyboardBehaviour.hideKeyboard(view.context as Activity)
         }
     }
 }

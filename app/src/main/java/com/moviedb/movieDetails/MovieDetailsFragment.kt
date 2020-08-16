@@ -24,6 +24,7 @@ import com.moviedb.databinding.FragmentMovieDetailsBinding
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_movie_details.*
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -55,9 +56,13 @@ class MovieDetailsFragment : Fragment() {
             }
             val parser = SimpleDateFormat("yyyy-MM-dd", Locale.US)
             val formatter = SimpleDateFormat("MMM yyyy", Locale.US)
-            val output = formatter.format(parser.parse(it.release_date)!!)
-            binding.monthYearRelease.text = output
-            binding.voteScore.text = it.vote_average.toString()
+            try {
+                val output = formatter.format(parser.parse(it.release_date)!!)
+                binding.monthYearRelease.text = output
+                binding.voteScore.text = it.vote_average.toString()
+            } catch (e: ParseException) {
+                binding.voteScore.text = "-"
+            }
 
             val fullUri = "https://image.tmdb.org/t/p/original${it.backdrop_path}"
             val imgUri = fullUri.toUri().buildUpon().scheme("https").build()
