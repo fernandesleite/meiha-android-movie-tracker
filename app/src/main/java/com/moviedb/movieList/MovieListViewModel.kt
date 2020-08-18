@@ -13,6 +13,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.*
 
 class MovieListViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -63,11 +64,12 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
             try {
                 genreRepository.refreshGenresOfflineCache()
                 movieRepository.refreshMoviesOfflineCache()
-                _popularMovies.value = _page.value?.let { movieRepository.getPopularMovies(it) }
-                _upcomingMovies.value = _page.value?.let { movieRepository.getUpcomingMovies(it) }
-                _topRatedMovies.value = _page.value?.let { movieRepository.getTopRatedMovies(it) }
+                _popularMovies.value = _page.value?.let { movieRepository.getPopularMovies(it, Locale.getDefault().country) }
+                _upcomingMovies.value = _page.value?.let { movieRepository.getUpcomingMovies(it, Locale.getDefault().country) }
+                Log.i("MovieListViewModel", Locale.getDefault().country)
+                _topRatedMovies.value = _page.value?.let { movieRepository.getTopRatedMovies(it, Locale.getDefault().country) }
                 _nowPlayingMovies.value =
-                    _page.value?.let { movieRepository.getNowPlayingMovies(it) }
+                    _page.value?.let { movieRepository.getNowPlayingMovies(it, Locale.getDefault().country) }
             } catch (e: Exception) {
                 Log.e("MovieListViewModel", e.message, e)
             }
@@ -88,7 +90,7 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
         coroutineScope.launch {
             try {
                 _searchMovies.value =
-                    _page.value?.let { movieRepository.getSearchMovie(it, _searchQuery) }
+                    _page.value?.let { movieRepository.getSearchMovie(it, _searchQuery,Locale.getDefault().country) }
 
             } catch (e: Exception) {
                 Log.e("MovieListViewModel", e.message, e)

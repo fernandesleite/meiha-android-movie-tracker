@@ -8,40 +8,41 @@ import com.moviedb.persistence.MoviesAppDatabase
 import com.moviedb.util.toDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.*
 
 class MovieRepository(private val database: MoviesAppDatabase) {
 
     suspend fun refreshMoviesOfflineCache() {
         withContext(Dispatchers.IO) {
             database.movieDao.clear()
-            val getMovieListSuspended = TMDbApi.retrofitService.getPopularMovies(1)
+            val getMovieListSuspended = TMDbApi.retrofitService.getPopularMovies(1, Locale.getDefault().country)
             database.movieDao.insertAll(getMovieListSuspended.results.toDatabase(database))
         }
     }
 
-    suspend fun getPopularMovies(page: Int): List<Movie> =
+    suspend fun getPopularMovies(page: Int, region: String): List<Movie> =
         withContext(Dispatchers.IO) {
-            TMDbApi.retrofitService.getPopularMovies(page).results.toDatabase(database)
+            TMDbApi.retrofitService.getPopularMovies(page, region).results.toDatabase(database)
         }
 
-    suspend fun getUpcomingMovies(page: Int): List<Movie> =
+    suspend fun getUpcomingMovies(page: Int, region: String): List<Movie> =
         withContext(Dispatchers.IO) {
-            TMDbApi.retrofitService.getUpcomingMovies(page).results.toDatabase(database)
+            TMDbApi.retrofitService.getUpcomingMovies(page, region).results.toDatabase(database)
         }
 
-    suspend fun getTopRatedMovies(page: Int): List<Movie> =
+    suspend fun getTopRatedMovies(page: Int, region: String): List<Movie> =
         withContext(Dispatchers.IO) {
-            TMDbApi.retrofitService.getTopRatedMovies(page).results.toDatabase(database)
+            TMDbApi.retrofitService.getTopRatedMovies(page, region).results.toDatabase(database)
         }
 
-    suspend fun getNowPlayingMovies(page: Int): List<Movie> =
+    suspend fun getNowPlayingMovies(page: Int, region: String): List<Movie> =
         withContext(Dispatchers.IO) {
-            TMDbApi.retrofitService.getNowPlayingMovies(page).results.toDatabase(database)
+            TMDbApi.retrofitService.getNowPlayingMovies(page, region).results.toDatabase(database)
         }
 
-    suspend fun getSearchMovie(page: Int, query: String): List<Movie> =
+    suspend fun getSearchMovie(page: Int, query: String, region: String): List<Movie> =
         withContext(Dispatchers.IO) {
-            TMDbApi.retrofitService.getSearchMovie(page, query).results.toDatabase(database)
+            TMDbApi.retrofitService.getSearchMovie(page, query, region).results.toDatabase(database)
         }
 
     suspend fun getMovieDetails(movieId: Int): TMDbMovieDetails =
