@@ -2,76 +2,75 @@ package com.moviedb.movieList
 
 import android.app.Activity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.moviedb.R
-import com.moviedb.databinding.FragmentSearchMovieListBinding
+import com.moviedb.persistence.Movie
 import com.moviedb.util.KeyboardBehaviour
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class SearchMovieListFragment : Fragment() {
-    lateinit var viewModel: MovieListViewModel
-    lateinit var binding: FragmentSearchMovieListBinding
+class SearchMovieListFragment : MovieListBaseFragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        retainInstance = true
-        binding = FragmentSearchMovieListBinding.inflate(inflater)
-        viewModel = ViewModelProvider(this).get(MovieListViewModel::class.java)
-
-
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
-        binding.movieList.adapter = MovieListAdapter()
-        val mAdapter: MovieListAdapter = binding.movieList.adapter as MovieListAdapter
-
-        NavigationUI.setupWithNavController(
-            binding.toolbar,
-            NavHostFragment.findNavController(requireParentFragment().myNavHostFragment)
-        )
-
-        viewModel.searchMovies.observe(viewLifecycleOwner, Observer {
-            mAdapter.addItems(it.toMutableList())
-        })
-        return binding.root
+    override fun getMovieList(): LiveData<List<Movie>> {
+        return viewModel.searchMovies
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.toolbarLayout.appBar.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.GONE
+
+        NavigationUI.setupWithNavController(
+            binding.toolbarLayout.toolbar,
+            NavHostFragment.findNavController(requireParentFragment().myNavHostFragment)
+        )
+        addPagination()
+
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        toolbar.inflateMenu(R.menu.search_bar)
 
-        val searchItem = toolbar.menu.findItem(R.id.search_bar)
-        val sv = searchItem.actionView as SearchView
-        sv.setIconifiedByDefault(false)
-        sv.requestFocus()
+        toolbar.apply {
+            toolbar.inflateMenu(R.menu.search_bar)
+            val searchItem = menu.findItem(R.id.search_bar)
+
+            val sv = searchItem.actionView as SearchView
+            sv.apply {
+                setIconifiedByDefault(false)
+                requestFocus()
+                setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        viewModel.getSearchQuery(query ?: "")
+                        return false
+                    }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        mAdapter.removeItems()
+                        viewModel.resetPage()
+                        viewModel.getSearchQuery(newText ?: "")
+                        return false
+                    }
+
+                })
+            }
+        }
+        viewModel.apply {
+            page.observe(viewLifecycleOwner, Observer {
+                if (it > 1) {
+                    getSearchQuery(viewModel.searchQuery)
+                }
+            })
+            resetPage()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
         KeyboardBehaviour.showKeyboard(context as Activity)
-        sv.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.getSearchQuery(query ?: "")
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.getSearchQuery(newText ?: "")
-                val mAdapter: MovieListAdapter = binding.movieList.adapter as MovieListAdapter
-                mAdapter.removeItems()
-                return false
-            }
-
-        })
-
     }
 }

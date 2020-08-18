@@ -26,6 +26,8 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     )
     val genres = genreRepository.genres
     private val _page = MutableLiveData<Int>()
+    val page: LiveData<Int>
+        get() = _page
 
     private val _popularMovies = MutableLiveData<List<Movie>>()
     val popularMovies: LiveData<List<Movie>>
@@ -46,6 +48,10 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     private val _searchMovies = MutableLiveData<List<Movie>>()
     val searchMovies: LiveData<List<Movie>>
         get() = _searchMovies
+
+    private var _searchQuery = ""
+    val searchQuery: String
+        get() = _searchQuery
 
     init {
         _page.value = 1
@@ -68,15 +74,21 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    fun resetPage() {
+        _page.value = 1
+    }
+
     fun nextPage() {
         _page.value = _page.value?.plus(1)
         refreshDataFromRepository()
     }
 
     fun getSearchQuery(query: String) {
+        _searchQuery = query
         coroutineScope.launch {
             try {
-                _searchMovies.value = _page.value?.let { movieRepository.getSearchMovie(it, query) }
+                _searchMovies.value =
+                    _page.value?.let { movieRepository.getSearchMovie(it, _searchQuery) }
 
             } catch (e: Exception) {
                 Log.e("MovieListViewModel", e.message, e)

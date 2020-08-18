@@ -2,6 +2,7 @@ package com.moviedb.movieList
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,12 +15,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.moviedb.databinding.FragmentMovieListBaseBinding
 import com.moviedb.persistence.Movie
+import com.moviedb.util.KeyboardBehaviour
 
 abstract class MovieListBaseFragment : Fragment() {
 
     lateinit var viewModel: MovieListViewModel
+    lateinit var binding: FragmentMovieListBaseBinding
+    lateinit var mAdapter: MovieListAdapter
+
     private var adapter = MovieListAdapter()
-    private lateinit var binding: FragmentMovieListBaseBinding
+    private var isLoading = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +38,22 @@ abstract class MovieListBaseFragment : Fragment() {
             viewModel = viewModel
             movieList.adapter = adapter
         }
+        mAdapter = binding.movieList.adapter as MovieListAdapter
+        getMovieList().observe(viewLifecycleOwner, Observer {
+            mAdapter.addItems(it.toMutableList())
+            binding.progressBar.visibility = View.GONE
+            isLoading = true
+        })
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        addPagination()
+    }
+
+    fun addPagination() {
         val toTheTopButton = binding.floatingActionButton
         fun animateFloatingButtonToVisible() {
             toTheTopButton.apply {
@@ -57,15 +77,6 @@ abstract class MovieListBaseFragment : Fragment() {
             animateFloatingButtonToGone()
         }
 
-        var isLoading = false
-        val mAdapter: MovieListAdapter = binding.movieList.adapter as MovieListAdapter
-
-        getMovieList().observe(viewLifecycleOwner, Observer {
-            mAdapter.addItems(it.toMutableList())
-            binding.progressBar.visibility = View.GONE
-            isLoading = true
-        })
-
         fun loadMoreItems() {
             viewModel.nextPage()
             isLoading = false
@@ -78,13 +89,13 @@ abstract class MovieListBaseFragment : Fragment() {
             val firstVisible = layoutManager.findFirstVisibleItemPosition()
             return firstVisible + visibleItemCount >= totalItemCount
         }
-
         binding.movieList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy < 0) {
                     animateFloatingButtonToGone()
                 } else if (toTheTopButton.visibility == View.GONE && dy > 0) {
+                    KeyboardBehaviour.hideKeyboard(context as Activity)
                     animateFloatingButtonToVisible()
                 }
                 if (calcPositionToLoadItems(recyclerView) && isLoading) {
@@ -93,8 +104,6 @@ abstract class MovieListBaseFragment : Fragment() {
                 }
             }
         })
-        return binding.root
-
     }
 
     override fun onPause() {
@@ -103,5 +112,4 @@ abstract class MovieListBaseFragment : Fragment() {
     }
 
     abstract fun getMovieList(): LiveData<List<Movie>>
-
 }
