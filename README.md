@@ -16,8 +16,8 @@ An Android App that fetches Popular Movies from [The Movie Database API](https:/
   - [x] Fetch Recommendations and Credits
   - [x] Infinite scroll
   - [x] More categories (Upcoming, Now Playing, Top Rated)
-  - [ ] Search function
-  - [ ] Favorite & Track Movies  
+  - [x] Search function
+  - [ ] Favorite Movies / To Watch / Watched
 
 # Screenshots
 Main Screen         |  Movie Details 
