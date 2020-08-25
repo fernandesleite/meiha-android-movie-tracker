@@ -13,6 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.moviedb.R
 import com.moviedb.databinding.FragmentMovieListBaseBinding
 import com.moviedb.persistence.Movie
 import com.moviedb.util.KeyboardBehaviour
@@ -30,6 +32,8 @@ abstract class MovieListBaseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val activity = requireNotNull(this.activity)
+        activity.findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.VISIBLE
         retainInstance = true
         viewModel = ViewModelProvider(this).get(MovieListViewModel::class.java)
         binding = FragmentMovieListBaseBinding.inflate(inflater)

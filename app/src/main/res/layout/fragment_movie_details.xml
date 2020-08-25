@@ -98,7 +98,7 @@
                             app:layout_constraintStart_toEndOf="@+id/runtime"
                             app:layout_constraintTop_toBottomOf="@+id/genre_list"
                             tools:text="1.0"
-                            app:drawableStartCompat="@drawable/star" />
+                            app:drawableStartCompat="@drawable/ic_star" />
 
                         <TextView
                             android:id="@+id/genre_list"
@@ -144,7 +144,7 @@
                             app:layout_collapseMode="parallax"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            tools:src="@drawable/star" />
+                            tools:src="@drawable/ic_star" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <ProgressBar

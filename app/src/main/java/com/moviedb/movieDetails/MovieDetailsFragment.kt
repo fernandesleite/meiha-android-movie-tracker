@@ -19,7 +19,9 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
+import com.moviedb.R
 import com.moviedb.databinding.FragmentMovieDetailsBinding
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.activity_main.*
@@ -124,4 +126,11 @@ class MovieDetailsFragment : Fragment() {
                 }
             }).attach()
     }
+
+    override fun onResume() {
+        super.onResume()
+        val activity = requireNotNull(this.activity)
+        activity.findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.GONE
+    }
+
 }

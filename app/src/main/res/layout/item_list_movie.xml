@@ -98,7 +98,7 @@
                 android:layout_width="0dp"
                 android:layout_height="14dp"
                 android:contentDescription="@string/star_score"
-                android:src="@drawable/star"
+                android:src="@drawable/ic_star"
                 app:layout_constraintBottom_toBottomOf="@+id/vote_score"
                 app:layout_constraintEnd_toStartOf="@id/vote_score"
                 app:layout_constraintTop_toTopOf="@+id/vote_score"
