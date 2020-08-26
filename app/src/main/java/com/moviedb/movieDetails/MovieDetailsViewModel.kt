@@ -36,6 +36,11 @@ class MovieDetailsViewModel(movieId: Int, application: Application) :
     val recommendations: LiveData<List<Movie>>
         get() = _recommendations
 
+    private val _movieDatabase = MutableLiveData<Int>()
+    val movieDatabase: LiveData<Int>
+        get() = _movieDatabase
+
+
     init {
         getMovieInfo(movieId)
     }
@@ -51,4 +56,25 @@ class MovieDetailsViewModel(movieId: Int, application: Application) :
             Log.e("MovieDetailsViewModel", e.message, e)
         }
     }
+
+    fun addToWatchMovie(status: Int, movieId: Int) {
+        try {
+            coroutineScope.launch {
+                movieRepository.addToWatchMovieToCache(status, movieId)
+            }
+        } catch (e: Exception) {
+            Log.e("MovieDetailsViewModel", e.message, e)
+        }
+    }
+
+    fun deleteMovie(movieId: Int) {
+        try {
+            coroutineScope.launch {
+                movieRepository.deleteMovies(movieId)
+            }
+        } catch (e: Exception) {
+            Log.e("MovieDetailsViewModel", e.message, e)
+        }
+    }
 }
+

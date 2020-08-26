@@ -24,7 +24,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.moviedb.R
 import com.moviedb.databinding.FragmentMovieDetailsBinding
 import jp.wasabeef.glide.transformations.BlurTransformation
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -45,12 +44,35 @@ class MovieDetailsFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MovieDetailsViewModel::class.java)
 
         val binding = FragmentMovieDetailsBinding.inflate(inflater)
+
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         NavigationUI.setupWithNavController(
             binding.toolbar,
-            NavHostFragment.findNavController(requireParentFragment().myNavHostFragment)
+            NavHostFragment.findNavController(requireParentFragment())
         )
+        binding.toolbar.inflateMenu(R.menu.add_watch_menu)
+
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.add_to_watch -> {
+                    viewModel.details.observe(viewLifecycleOwner, Observer {
+                        viewModel.addToWatchMovie(1, it.id)
+                    })
+                }
+                R.id.add_watched -> {
+                    viewModel.details.observe(viewLifecycleOwner, Observer {
+                        viewModel.addToWatchMovie(2, it.id)
+                    })
+                }
+                R.id.delete -> {
+                    viewModel.details.observe(viewLifecycleOwner, Observer {
+                        viewModel.deleteMovie(it.id)
+                    })
+                }
+            }
+            true
+        }
 
         viewModel.details.observe(viewLifecycleOwner, Observer {
             binding.genreList.text = it.genres.joinToString { genre ->

@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,11 +51,6 @@ abstract class MovieListBaseFragment : Fragment() {
         })
 
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        addPagination()
     }
 
     fun addPagination() {
@@ -113,6 +109,12 @@ abstract class MovieListBaseFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         adapter = binding.movieList.adapter as MovieListAdapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i("test", "on resume")
+
     }
 
     abstract fun getMovieList(): LiveData<List<Movie>>

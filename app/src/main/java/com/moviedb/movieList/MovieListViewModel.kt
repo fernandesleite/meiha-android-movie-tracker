@@ -54,6 +54,12 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     val searchQuery: String
         get() = _searchQuery
 
+    val watched: LiveData<List<Movie>>
+        get() = movieRepository.getWatchedMovies()
+
+    val toWatch: LiveData<List<Movie>>
+        get() = movieRepository.getToWatchMovies()
+
     init {
         _page.value = 1
         refreshDataFromRepository()
