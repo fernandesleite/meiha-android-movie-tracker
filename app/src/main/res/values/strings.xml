@@ -14,4 +14,5 @@
     <string name="explore">Explore</string>
     <string name="watched">Watched</string>
     <string name="to_watch">To Watch</string>
+    <string name="delete">Delete</string>
 </resources>

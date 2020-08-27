@@ -36,11 +36,6 @@ class MovieDetailsViewModel(movieId: Int, application: Application) :
     val recommendations: LiveData<List<Movie>>
         get() = _recommendations
 
-    private val _movieDatabase = MutableLiveData<Int>()
-    val movieDatabase: LiveData<Int>
-        get() = _movieDatabase
-
-
     init {
         getMovieInfo(movieId)
     }
@@ -57,10 +52,14 @@ class MovieDetailsViewModel(movieId: Int, application: Application) :
         }
     }
 
-    fun addToWatchMovie(status: Int, movieId: Int) {
+    fun getMovie(movieId: Int): LiveData<Int> {
+        return movieRepository.getMovie(movieId)
+    }
+
+    fun movieToCache(status: Int, movieId: Int) {
         try {
             coroutineScope.launch {
-                movieRepository.addToWatchMovieToCache(status, movieId)
+                movieRepository.movieToCache(status, movieId)
             }
         } catch (e: Exception) {
             Log.e("MovieDetailsViewModel", e.message, e)

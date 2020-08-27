@@ -4,7 +4,6 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +33,8 @@ abstract class MovieListBaseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val activity = requireNotNull(this.activity)
-        activity.findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.VISIBLE
+        activity.findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility =
+            View.VISIBLE
         retainInstance = true
         viewModel = ViewModelProvider(this).get(MovieListViewModel::class.java)
         binding = FragmentMovieListBaseBinding.inflate(inflater)
@@ -113,7 +113,6 @@ abstract class MovieListBaseFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.i("test", "on resume")
 
     }
 

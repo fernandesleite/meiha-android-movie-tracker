@@ -2,10 +2,10 @@ package com.moviedb.movieDetails
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -39,89 +39,109 @@ class MovieDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val activity = requireNotNull(this.activity)
+        val movieId = requireArguments().getInt("movieId")
         viewModelFactory =
-            MovieDetailsViewModelFactory(requireArguments().getInt("movieId"), activity.application)
+            MovieDetailsViewModelFactory(movieId, activity.application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MovieDetailsViewModel::class.java)
 
         val binding = FragmentMovieDetailsBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        val toolbar = binding.toolbar
         NavigationUI.setupWithNavController(
-            binding.toolbar,
+            toolbar,
             NavHostFragment.findNavController(requireParentFragment())
         )
-        binding.toolbar.inflateMenu(R.menu.add_watch_menu)
 
-        binding.toolbar.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.add_to_watch -> {
-                    viewModel.details.observe(viewLifecycleOwner, Observer {
-                        viewModel.addToWatchMovie(1, it.id)
-                    })
+        viewModel.getMovie(movieId).observe(viewLifecycleOwner, Observer { int ->
+            toolbar.menu.clear()
+            when (int) {
+                1 -> {
+                    toolbar.inflateMenu(R.menu.watched_group_menu)
                 }
-                R.id.add_watched -> {
-                    viewModel.details.observe(viewLifecycleOwner, Observer {
-                        viewModel.addToWatchMovie(2, it.id)
-                    })
+                2 -> {
+                    toolbar.inflateMenu(R.menu.to_watch_group_menu)
                 }
-                R.id.delete -> {
-                    viewModel.details.observe(viewLifecycleOwner, Observer {
-                        viewModel.deleteMovie(it.id)
-                    })
+                else -> {
+                    toolbar.inflateMenu(R.menu.unlabeled_group_menu)
                 }
+            }
+        })
+
+        toolbar.setOnMenuItemClickListener { item ->
+            viewModel.apply {
+                details.observe(viewLifecycleOwner, Observer {
+                    when (item.itemId) {
+                        R.id.add_watched -> {
+                            movieToCache(1, it.id)
+                            Toast.makeText(context, "Movie watched", Toast.LENGTH_SHORT).show()
+                        }
+                        R.id.add_to_watch -> {
+                            Toast.makeText(context, "Movie to watch", Toast.LENGTH_SHORT).show()
+                            movieToCache(2, it.id)
+                        }
+                        R.id.delete -> {
+                            Toast.makeText(context, "Movie deleted from lists", Toast.LENGTH_SHORT)
+                                .show()
+                            deleteMovie(it.id)
+                        }
+                    }
+                })
             }
             true
         }
 
         viewModel.details.observe(viewLifecycleOwner, Observer {
-            binding.genreList.text = it.genres.joinToString { genre ->
-                genre.name
-            }
-            val parser = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-            val formatter = SimpleDateFormat("MMM yyyy", Locale.US)
-            try {
-                val output = formatter.format(parser.parse(it.release_date)!!)
-                binding.monthYearRelease.text = output
-                binding.voteScore.text = it.vote_average.toString()
-            } catch (e: ParseException) {
-                binding.voteScore.text = "-"
-            }
 
-            val fullUri = "https://image.tmdb.org/t/p/original${it.backdrop_path}"
-            val imgUri = fullUri.toUri().buildUpon().scheme("https").build()
-            context?.let { context ->
-                Log.i("test", imgUri.toString())
-                Glide.with(context)
-                    .load(imgUri)
-                    .listener(object : RequestListener<Drawable> {
-                        override fun onResourceReady(
-                            resource: Drawable?,
-                            model: Any?,
-                            target: com.bumptech.glide.request.target.Target<Drawable>?,
-                            dataSource: DataSource?,
-                            isFirstResource: Boolean
-                        ): Boolean {
-                            binding.progressBar.visibility = View.GONE
-                            binding.detailsLayout.visibility = View.VISIBLE
-                            return false
-                        }
+            binding.apply {
+                genreList.text = it.genres.joinToString { genre ->
+                    genre.name
+                }
+                val parser = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+                val formatter = SimpleDateFormat("MMM yyyy", Locale.US)
+                try {
+                    val output = formatter.format(parser.parse(it.release_date)!!)
+                    monthYearRelease.text = output
+                    voteScore.text = it.vote_average.toString()
+                } catch (e: ParseException) {
+                    voteScore.text = "-"
+                }
 
-                        override fun onLoadFailed(
-                            e: GlideException?,
-                            model: Any?,
-                            target: com.bumptech.glide.request.target.Target<Drawable>?,
-                            isFirstResource: Boolean
-                        ): Boolean {
-                            binding.progressBar.visibility = View.GONE
-                            binding.detailsLayout.visibility = View.VISIBLE
-                            return false
-                        }
-                    })
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .transform(RoundedCorners(8))
-                    .apply(RequestOptions.bitmapTransform(BlurTransformation(15, 1)))
-                    .into(binding.backdropImage)
+                val fullUri = "https://image.tmdb.org/t/p/original${it.backdrop_path}"
+                val imgUri = fullUri.toUri().buildUpon().scheme("https").build()
+                context?.let { context ->
+                    Glide.with(context)
+                        .load(imgUri)
+                        .listener(object : RequestListener<Drawable> {
+                            override fun onResourceReady(
+                                resource: Drawable?,
+                                model: Any?,
+                                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                                dataSource: DataSource?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                progressBar.visibility = View.GONE
+                                detailsLayout.visibility = View.VISIBLE
+                                return false
+                            }
+
+                            override fun onLoadFailed(
+                                e: GlideException?,
+                                model: Any?,
+                                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                progressBar.visibility = View.GONE
+                                detailsLayout.visibility = View.VISIBLE
+                                return false
+                            }
+                        })
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .transform(RoundedCorners(8))
+                        .apply(RequestOptions.bitmapTransform(BlurTransformation(15, 1)))
+                        .into(backdropImage)
+                }
             }
         })
         return binding.root
@@ -154,5 +174,4 @@ class MovieDetailsFragment : Fragment() {
         val activity = requireNotNull(this.activity)
         activity.findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.GONE
     }
-
 }

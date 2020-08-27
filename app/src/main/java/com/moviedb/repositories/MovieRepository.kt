@@ -20,13 +20,17 @@ class MovieRepository(private val database: MoviesAppDatabase) {
         }
     }
 
-    suspend fun addToWatchMovieToCache(status: Int, movieId: Int){
+    suspend fun movieToCache(status: Int, movieId: Int) {
         withContext(Dispatchers.IO) {
             val getMovieListSuspended = TMDbApi.retrofitService.getMovieDetails(movieId)
             val movie = getMovieListSuspended.toMovie(database)
             movie.category = status
             database.movieDao.insert(movie)
         }
+    }
+
+    fun getMovie(movieId: Int): LiveData<Int> {
+        return database.movieDao.getMovie(movieId)
     }
 
     fun getWatchedMovies(): LiveData<List<Movie>> {
@@ -38,8 +42,8 @@ class MovieRepository(private val database: MoviesAppDatabase) {
     }
 
     suspend fun deleteMovies(id: Int) {
-        withContext(Dispatchers.IO){
-        database.movieDao.deleteMovie(id)
+        withContext(Dispatchers.IO) {
+            database.movieDao.deleteMovie(id)
         }
     }
 

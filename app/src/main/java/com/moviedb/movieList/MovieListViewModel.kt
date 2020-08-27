@@ -72,7 +72,6 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
                 movieRepository.refreshMoviesOfflineCache()
                 _popularMovies.value = _page.value?.let { movieRepository.getPopularMovies(it, Locale.getDefault().country) }
                 _upcomingMovies.value = _page.value?.let { movieRepository.getUpcomingMovies(it, Locale.getDefault().country) }
-                Log.i("MovieListViewModel", Locale.getDefault().country)
                 _topRatedMovies.value = _page.value?.let { movieRepository.getTopRatedMovies(it, Locale.getDefault().country) }
                 _nowPlayingMovies.value =
                     _page.value?.let { movieRepository.getNowPlayingMovies(it, Locale.getDefault().country) }
