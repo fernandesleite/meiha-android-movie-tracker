@@ -60,6 +60,9 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     val toWatch: LiveData<List<Movie>>
         get() = movieRepository.getToWatchMovies()
 
+    private val country = Locale.getDefault().country
+    private val language = Locale.getDefault().language
+
     init {
         _page.value = 1
         refreshDataFromRepository()
@@ -68,13 +71,37 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     private fun refreshDataFromRepository() {
         coroutineScope.launch {
             try {
-                genreRepository.refreshGenresOfflineCache()
+                genreRepository.refreshGenresOfflineCache(language)
                 movieRepository.refreshMoviesOfflineCache()
-                _popularMovies.value = _page.value?.let { movieRepository.getPopularMovies(it, Locale.getDefault().country) }
-                _upcomingMovies.value = _page.value?.let { movieRepository.getUpcomingMovies(it, Locale.getDefault().country) }
-                _topRatedMovies.value = _page.value?.let { movieRepository.getTopRatedMovies(it, Locale.getDefault().country) }
+                _popularMovies.value = _page.value?.let {
+                    movieRepository.getPopularMovies(
+                        it,
+                        country,
+                        language
+                    )
+                }
+                _upcomingMovies.value = _page.value?.let {
+                    movieRepository.getUpcomingMovies(
+                        it,
+                        country,
+                        language
+                    )
+                }
+                _topRatedMovies.value = _page.value?.let {
+                    movieRepository.getTopRatedMovies(
+                        it,
+                        country,
+                        language
+                    )
+                }
                 _nowPlayingMovies.value =
-                    _page.value?.let { movieRepository.getNowPlayingMovies(it, Locale.getDefault().country) }
+                    _page.value?.let {
+                        movieRepository.getNowPlayingMovies(
+                            it,
+                            country,
+                            language
+                        )
+                    }
             } catch (e: Exception) {
                 Log.e("MovieListViewModel", e.message, e)
             }
@@ -90,12 +117,23 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
         refreshDataFromRepository()
     }
 
+    fun getMovie(movieId: Int): LiveData<Int> {
+        return movieRepository.getMovie(movieId)
+    }
+
     fun getSearchQuery(query: String) {
         _searchQuery = query
         coroutineScope.launch {
             try {
                 _searchMovies.value =
-                    _page.value?.let { movieRepository.getSearchMovie(it, _searchQuery,Locale.getDefault().country) }
+                    _page.value?.let {
+                        movieRepository.getSearchMovie(
+                            it,
+                            _searchQuery,
+                            country,
+                            language
+                        )
+                    }
 
             } catch (e: Exception) {
                 Log.e("MovieListViewModel", e.message, e)

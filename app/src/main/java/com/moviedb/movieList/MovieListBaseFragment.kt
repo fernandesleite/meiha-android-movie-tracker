@@ -45,6 +45,12 @@ abstract class MovieListBaseFragment : Fragment() {
         }
         mAdapter = binding.movieList.adapter as MovieListAdapter
         getMovieList().observe(viewLifecycleOwner, Observer {
+            it.map { movie ->
+                viewModel.getMovie(movie.id).observe(viewLifecycleOwner, Observer { int ->
+                    mAdapter.notifyDataSetChanged()
+                    movie.category = int
+                })
+            }
             mAdapter.addItems(it.toMutableList())
             binding.progressBar.visibility = View.GONE
             isLoading = true
@@ -109,11 +115,6 @@ abstract class MovieListBaseFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         adapter = binding.movieList.adapter as MovieListAdapter
-    }
-
-    override fun onResume() {
-        super.onResume()
-
     }
 
     abstract fun getMovieList(): LiveData<List<Movie>>

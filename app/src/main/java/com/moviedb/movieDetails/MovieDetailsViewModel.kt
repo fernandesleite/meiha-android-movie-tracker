@@ -14,6 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.*
 
 class MovieDetailsViewModel(movieId: Int, application: Application) :
     AndroidViewModel(application) {
@@ -36,6 +37,9 @@ class MovieDetailsViewModel(movieId: Int, application: Application) :
     val recommendations: LiveData<List<Movie>>
         get() = _recommendations
 
+    private val country = Locale.getDefault().country
+    private val language = Locale.getDefault().language
+
     init {
         getMovieInfo(movieId)
     }
@@ -43,9 +47,9 @@ class MovieDetailsViewModel(movieId: Int, application: Application) :
     private fun getMovieInfo(movieId: Int) {
         try {
             coroutineScope.launch {
-                _details.value = movieRepository.getMovieDetails(movieId)
+                _details.value = movieRepository.getMovieDetails(movieId, language)
                 _credits.value = movieRepository.getMovieCredits(movieId)
-                _recommendations.value = movieRepository.getMovieRecommendations(movieId)
+                _recommendations.value = movieRepository.getMovieRecommendations(movieId, language)
             }
         } catch (e: Exception) {
             Log.e("MovieDetailsViewModel", e.message, e)
@@ -59,7 +63,7 @@ class MovieDetailsViewModel(movieId: Int, application: Application) :
     fun movieToCache(status: Int, movieId: Int) {
         try {
             coroutineScope.launch {
-                movieRepository.movieToCache(status, movieId)
+                movieRepository.movieToCache(status, movieId, language)
             }
         } catch (e: Exception) {
             Log.e("MovieDetailsViewModel", e.message, e)

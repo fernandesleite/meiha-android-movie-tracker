@@ -11,7 +11,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-
 private const val BASE_URL = "https://api.themoviedb.org/3/"
 private const val API_KEY = "d686c93461aba88b229359f910bd76d1"
 
@@ -41,31 +40,58 @@ private val retrofit = Retrofit.Builder()
 
 interface TMDbApiService {
     @GET("movie/popular")
-    suspend fun getPopularMovies(@Query("page") page: Int, @Query("region") region: String): TMDbMoviesResponse
+    suspend fun getPopularMovies(
+        @Query("page") page: Int,
+        @Query("region") region: String,
+        @Query("language") language: String
+    ): TMDbMoviesResponse
 
     @GET("movie/upcoming")
-    suspend fun getUpcomingMovies(@Query("page") page: Int, @Query("region") region: String): TMDbMoviesResponse
+    suspend fun getUpcomingMovies(
+        @Query("page") page: Int,
+        @Query("region") region: String,
+        @Query("language") language: String
+    ): TMDbMoviesResponse
 
     @GET("movie/top_rated")
-    suspend fun getTopRatedMovies(@Query("page") page: Int, @Query("region") region: String): TMDbMoviesResponse
+    suspend fun getTopRatedMovies(
+        @Query("page") page: Int,
+        @Query("region") region: String,
+        @Query("language") language: String
+    ): TMDbMoviesResponse
 
     @GET("movie/now_playing")
-    suspend fun getNowPlayingMovies(@Query("page") page: Int, @Query("region") region: String): TMDbMoviesResponse
+    suspend fun getNowPlayingMovies(
+        @Query("page") page: Int,
+        @Query("region") region: String,
+        @Query("language") language: String
+    ): TMDbMoviesResponse
 
     @GET("search/movie")
-    suspend fun getSearchMovie(@Query("page") page: Int, @Query("query") query: String, @Query("region") region: String): TMDbMoviesResponse
+    suspend fun getSearchMovie(
+        @Query("page") page: Int,
+        @Query("query") query: String,
+        @Query("region") region: String,
+        @Query("language") language: String
+    ): TMDbMoviesResponse
 
     @GET("movie/{movieId}?append_to_response=recommendations,credits,videos&")
-    suspend fun getMovieDetails(@Path("movieId") movieId: Int): TMDbMovieDetails
+    suspend fun getMovieDetails(
+        @Path("movieId") movieId: Int,
+        @Query("language") language: String
+    ): TMDbMovieDetails
 
     @GET("movie/{movieId}/credits")
     suspend fun getMovieCredits(@Path("movieId") movieId: Int): TMDbMovieCredits
 
     @GET("movie/{movieId}/recommendations")
-    suspend fun getMovieRecommendations(@Path("movieId") movieId: Int): TMDbMovieRecommendations
+    suspend fun getMovieRecommendations(
+        @Path("movieId") movieId: Int,
+        @Query("language") language: String
+    ): TMDbMovieRecommendations
 
     @GET("genre/movie/list")
-    suspend fun getGenreList(): TMDbGenresResponse
+    suspend fun getGenreList(@Query("language") language: String): TMDbGenresResponse
 }
 
 //Lazy public object so only one instance is created when called

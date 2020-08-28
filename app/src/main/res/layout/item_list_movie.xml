@@ -25,23 +25,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <FrameLayout
                 android:id="@+id/movie_image"
-                android:layout_width="90dp"
-                android:layout_height="135dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_normal"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:layout_marginBottom="@dimen/spacing_normal"
-                android:adjustViewBounds="true"
-                android:contentDescription="@{movie.title}"
-                android:cropToPadding="true"
-                android:scaleType="centerCrop"
-                app:imageUrl="@{movie.poster_path}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                tools:src="@drawable/ic_broken_image" />
+                app:layout_constraintVertical_bias="1.0">
+
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="135dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@{movie.title}"
+                    android:cropToPadding="true"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{movie.poster_path}"
+                    tools:src="@drawable/ic_broken_image" />
+
+                <ImageView
+                    android:id="@+id/watch_image"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom|end"
+                    android:contentDescription="@string/check_icon"
+                    android:src="@drawable/ic_check_circle_18dp" />
+            </FrameLayout>
+
 
             <TextView
                 android:id="@+id/movie_release-date"

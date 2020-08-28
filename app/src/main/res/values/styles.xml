@@ -35,6 +35,5 @@
     <style name="BottomNavigationViewTheme">
         <item name="colorPrimary">@color/colorAccent</item>
         <item name="android:colorForeground">@color/text_primary</item>
-        <item name="android:background">?attr/colorPrimaryDark</item>
     </style>
 </resources>

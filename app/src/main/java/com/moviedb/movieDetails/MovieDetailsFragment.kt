@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -56,15 +55,25 @@ class MovieDetailsFragment : Fragment() {
 
         viewModel.getMovie(movieId).observe(viewLifecycleOwner, Observer { int ->
             toolbar.menu.clear()
-            when (int) {
-                1 -> {
-                    toolbar.inflateMenu(R.menu.watched_group_menu)
-                }
-                2 -> {
-                    toolbar.inflateMenu(R.menu.to_watch_group_menu)
-                }
-                else -> {
-                    toolbar.inflateMenu(R.menu.unlabeled_group_menu)
+            binding.apply {
+                when (int) {
+                    1 -> {
+                        watchImage.visibility = View.VISIBLE
+                        watchImage.setImageResource(R.drawable.ic_check_circle_18dp)
+                        watchText.text = getString(R.string.watched)
+                        toolbar.inflateMenu(R.menu.watched_group_menu)
+                    }
+                    2 -> {
+                        watchImage.visibility = View.VISIBLE
+                        watchText.text = getString(R.string.to_watch)
+                        watchImage.setImageResource(R.drawable.ic_pending_18dp)
+                        toolbar.inflateMenu(R.menu.to_watch_group_menu)
+                    }
+                    else -> {
+                        watchImage.visibility = View.GONE
+                        watchText.text = ""
+                        toolbar.inflateMenu(R.menu.unlabeled_group_menu)
+                    }
                 }
             }
         })
@@ -75,15 +84,11 @@ class MovieDetailsFragment : Fragment() {
                     when (item.itemId) {
                         R.id.add_watched -> {
                             movieToCache(1, it.id)
-                            Toast.makeText(context, "Movie watched", Toast.LENGTH_SHORT).show()
                         }
                         R.id.add_to_watch -> {
-                            Toast.makeText(context, "Movie to watch", Toast.LENGTH_SHORT).show()
                             movieToCache(2, it.id)
                         }
                         R.id.delete -> {
-                            Toast.makeText(context, "Movie deleted from lists", Toast.LENGTH_SHORT)
-                                .show()
                             deleteMovie(it.id)
                         }
                     }
@@ -157,13 +162,13 @@ class MovieDetailsFragment : Fragment() {
             TabLayoutMediator.TabConfigurationStrategy { tab, position ->
                 when (position) {
                     0 -> {
-                        tab.text = "Overview"
+                        tab.text = getString(R.string.overview)
                     }
                     1 -> {
-                        tab.text = "Credits"
+                        tab.text = getString(R.string.credits)
                     }
                     2 -> {
-                        tab.text = "More Like This"
+                        tab.text = getString(R.string.more_like_this)
                     }
                 }
             }).attach()

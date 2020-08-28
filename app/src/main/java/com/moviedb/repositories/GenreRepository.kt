@@ -9,9 +9,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class GenreRepository(private val database: MoviesAppDatabase) {
-    suspend fun refreshGenresOfflineCache() {
+    suspend fun refreshGenresOfflineCache(language: String) {
         withContext(Dispatchers.IO) {
-            val getGenreListSuspended = TMDbApi.retrofitService.getGenreList()
+            val getGenreListSuspended = TMDbApi.retrofitService.getGenreList(language)
             database.genreDao.insertAll(getGenreListSuspended.genres.toDatabase())
         }
     }

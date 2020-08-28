@@ -15,4 +15,12 @@
     <string name="watched">Watched</string>
     <string name="to_watch">To Watch</string>
     <string name="delete">Delete</string>
+    <string name="check_icon">check icon</string>
+    <string name="popular">Popular</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="overview">Overview</string>
+    <string name="credits">Credits</string>
+    <string name="more_like_this">More Like This</string>
 </resources>
