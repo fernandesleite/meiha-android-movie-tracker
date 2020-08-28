@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/watchedMovieListFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_check_circle_18dp"
+        android:title="@string/watched" />
+    <item
+        android:id="@+id/movieList"
+        android:checked="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_theaters_black_18dp"
+        android:title="@string/explore" />
+    <item
+        android:id="@+id/toWatchMovieListFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_pending_18dp"
+        android:title="@string/to_watch" />
+</menu>

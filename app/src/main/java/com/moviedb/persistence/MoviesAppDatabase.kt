@@ -7,11 +7,16 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.moviedb.persistence.converters.GenreTypeConverter
 
-@Database(entities = [Movie::class, Genre::class], version = 1, exportSchema = false)
+@Database(
+    entities = [Movie::class, MovieStatus::class, Genre::class],
+    version = 1,
+    exportSchema = false
+)
 @TypeConverters(GenreTypeConverter::class)
 abstract class MoviesAppDatabase : RoomDatabase() {
     abstract val movieDao: MovieDao
     abstract val genreDao: GenreDao
+    abstract val movieStatusDao: MovieStatusDao
 
     companion object {
         @Volatile

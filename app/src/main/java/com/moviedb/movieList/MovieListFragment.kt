@@ -46,16 +46,16 @@ class MovieList : Fragment() {
             TabLayoutMediator.TabConfigurationStrategy { tab, position ->
                 when (position) {
                     0 -> {
-                        tab.text = "Popular"
+                        tab.text = getString(R.string.popular)
                     }
                     1 -> {
-                        tab.text = "Now Playing"
+                        tab.text = getString(R.string.now_playing)
                     }
                     2 -> {
-                        tab.text = "Upcoming"
+                        tab.text = getString(R.string.upcoming)
                     }
                     3 -> {
-                        tab.text = "Top Rated"
+                        tab.text = getString(R.string.top_rated)
                     }
                 }
             }).attach()
