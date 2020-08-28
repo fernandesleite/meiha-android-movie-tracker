@@ -20,7 +20,8 @@ fun List<TMDbMovie>.toDatabase(database: MoviesAppDatabase): List<Movie> {
             popularity = it.popularity,
             vote_count = it.vote_count,
             video = it.video,
-            vote_average = it.vote_average
+            vote_average = it.vote_average,
+            added_timestamp = System.currentTimeMillis()
         )
     }
 }
@@ -38,6 +39,7 @@ fun TMDbMovieDetails.toMovie(database: MoviesAppDatabase) = Movie(
     popularity = popularity,
     vote_count = 0,
     video = video,
-    vote_average = vote_average
+    vote_average = vote_average,
+    added_timestamp = System.currentTimeMillis()
 )
 

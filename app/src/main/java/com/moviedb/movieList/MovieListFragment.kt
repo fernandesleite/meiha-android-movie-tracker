@@ -33,6 +33,8 @@ class MovieList : Fragment() {
         viewPager.adapter = MovieListPagerAdapter(this)
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        toolbar.title = getString(R.string.explore)
+
         toolbar.inflateMenu(R.menu.search_menu)
 
         toolbar.setOnMenuItemClickListener { item ->

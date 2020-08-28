@@ -3,6 +3,7 @@ package com.moviedb.movieList
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.LiveData
+import com.moviedb.R
 import com.moviedb.persistence.Movie
 
 class WatchedMovieListFragment: MovieListBaseFragment() {
@@ -12,6 +13,7 @@ class WatchedMovieListFragment: MovieListBaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbarLayout.appBar.visibility = View.VISIBLE
+        binding.toolbarLayout.toolbar.title = getString(R.string.watched)
         mAdapter.removeItems()
     }
 

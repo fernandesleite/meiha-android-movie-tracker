@@ -18,5 +18,6 @@ data class Movie(
     val vote_count: Int?,
     val video: Boolean?,
     val vote_average: Double?,
-    var category: Int? = 0
+    var category: Int? = 0,
+    var added_timestamp: Long
 )
