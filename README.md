@@ -1,4 +1,4 @@
-# MovieDB-Android-Tracker-Demo
+# Meiha - Android Movie Tracker
 An Android App that fetches Popular Movies from [The Movie Database API](https://developers.themoviedb.org) using
 
   - Kotlin
@@ -17,7 +17,7 @@ An Android App that fetches Popular Movies from [The Movie Database API](https:/
   - [x] Infinite scroll
   - [x] More categories (Upcoming, Now Playing, Top Rated)
   - [x] Search function
-  - [ ] Favorite Movies / To Watch / Watched
+  - [x] Favorite Movies / To Watch / Watched
 
 # Screenshots
 Main Screen         |  Movie Details 
