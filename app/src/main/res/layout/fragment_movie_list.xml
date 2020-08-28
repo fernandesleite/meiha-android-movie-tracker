@@ -34,9 +34,8 @@
                 android:background="?attr/colorPrimary"
                 android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:title="@string/app_name">
-
-            </androidx.appcompat.widget.Toolbar>
+                android:layout_marginStart="@dimen/spacing_normal"
+                app:navigationIcon="@drawable/ic_action_name" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"

@@ -32,4 +32,8 @@
         <item name="android:textColor">@color/text_secondary</item>
         <item name="fontFamily">@font/poppins_light</item>
     </style>
+    <style name="BottomNavigationViewTheme">
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="android:colorForeground">@color/text_primary</item>
+    </style>
 </resources>

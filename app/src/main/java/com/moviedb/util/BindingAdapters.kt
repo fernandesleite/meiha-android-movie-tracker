@@ -19,15 +19,19 @@ import java.util.*
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
-    imgUrl?.let {
-        val fullUri = "https://image.tmdb.org/t/p/original$imgUrl"
-        val imgUri = fullUri.toUri().buildUpon().scheme("https").build()
-        Glide.with(imgView.context)
-            .load(imgUri)
-            .placeholder(R.drawable.ic_broken_image)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .transform(RoundedCorners(8))
-            .into(imgView)
+    imgUrl.let {
+        if (it == null) {
+            Glide.with(imgView.context).load(R.drawable.ic_broken_image).into(imgView)
+        } else {
+            val fullUri = "https://image.tmdb.org/t/p/original$imgUrl"
+            val imgUri = fullUri.toUri().buildUpon().scheme("https").build()
+            Glide.with(imgView.context)
+                .load(imgUri)
+                .placeholder(R.drawable.ic_broken_image)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .transform(RoundedCorners(8))
+                .into(imgView)
+        }
     }
 }
 

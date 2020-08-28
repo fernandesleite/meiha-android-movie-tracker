@@ -38,4 +38,14 @@
         android:id="@+id/searchMovieListFragment"
         android:name="com.moviedb.movieList.SearchMovieListFragment"
         android:label="SearchMovieListFragment" />
+    <fragment
+        android:id="@+id/toWatchMovieListFragment"
+        android:name="com.moviedb.movieList.ToWatchMovieListFragment"
+        android:label="fragment_to_watch_movie_list"
+        tools:layout="@layout/fragment_to_watch_movie_list" />
+    <fragment
+        android:id="@+id/watchedMovieListFragment"
+        android:name="com.moviedb.movieList.WatchedMovieListFragment"
+        android:label="fragment_watched_movie_list"
+        tools:layout="@layout/fragment_watched_movie_list" />
 </navigation>

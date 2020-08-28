@@ -17,5 +17,6 @@ data class Movie(
     val popularity: Double?,
     val vote_count: Int?,
     val video: Boolean?,
-    val vote_average: Double?
+    val vote_average: Double?,
+    var category: Int? = 0
 )
